@@ -4,6 +4,10 @@ class Player {
     this._cards = [];
   }
 
+  cards() {
+    return this._cards
+  }
+
   name() {
     return this._name;
   }
