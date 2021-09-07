@@ -14,6 +14,8 @@ class GoFishController {
     const view = new GameView(game)
     view.draw(this.container())
   }
+
+  // container is one element HTML that gets updated with JS
 }
 
 window.controller = new GoFishController();
