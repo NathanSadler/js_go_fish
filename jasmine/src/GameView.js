@@ -10,8 +10,13 @@ class GameView {
 
   // This is just temporary. Will replace it when I figure out what I am doing  
   draw(container) {
-    const markup = `
-      <p>Hello World</p>
+    const markup = 
+    `
+      <h1>Game</h1>
+      <h2>Players</h2>
+      <ul>
+        ${this.game().players().map(player => `<li>${player.name()}</li>`)}
+      </ul>
     `
     const element = document.createElement('div')
     element.innerHTML = markup

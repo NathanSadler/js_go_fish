@@ -7,17 +7,26 @@ class LoginView {
     return document.getElementById('name')
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.onLogin(event.target.name.value)
+  }
+
   submitButton() {
     return document.getElementById('submit')
   }
 
-  // This is just temporary. Will replace it when I figure out what I am doing  
   draw(container) {
     const markup = `
-      <p>Login View</p>
+      <form class="user-form">
+        <label for="name">Your Name</label>
+        <input type="text" id="name"></input>
+        <input type="submit" id="submit" value="login"></input>  
+      </form>
     `
     const element = document.createElement('div')
     element.innerHTML = markup
+    element.onsubmit = this.onSubmit.bind(this)
     container.appendChild(element)
     return element
   }
