@@ -23,4 +23,12 @@ describe('Player', () => {
       expect(player.cards()).toEqual(card_list)
     })
   })
+
+  describe('#takeCard', () => {
+    it('gives a card to the player', () => {
+      const player = new Player('Player')
+      player.takeCard(new Card("7", "D"))
+      expect(player.cards()).toEqual([new Card("7", "D")])
+    })
+  })
 })

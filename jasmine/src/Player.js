@@ -11,4 +11,8 @@ class Player {
   name() {
     return this._name;
   }
+
+  takeCard(taken_card) {
+    this._cards.push(taken_card)
+  }
 }
