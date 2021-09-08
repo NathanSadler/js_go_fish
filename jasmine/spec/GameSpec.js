@@ -30,4 +30,20 @@ describe('Game', () => {
       expect(game.minimum_player_count()).toEqual(3)
     })
   })
+
+  describe('#startGame', () => {
+    it('shuffles the deck', () => {
+
+    })
+
+    describe('dealing the cards', () => {
+      it('gives each player seven cards if there are three or fewer players', () => {
+
+      })
+
+      it('gives each player five cards if there are four or more players', () => {
+        
+      })
+    })
+  })
 })
