@@ -14,6 +14,13 @@ describe('Game', () => {
     })
   })
 
+  describe('#minimum_player_count', () => {
+    it("returns the game's minimum number of players", () => {
+      const game = new Game([], 3)
+      expect(game.minimum_player_count()).toEqual(3)
+    })
+  })
+
   describe('#players', () => {
     it('returns the list of the players in the game', () => {
       const player1 = new Player('Player 1')
@@ -24,20 +31,13 @@ describe('Game', () => {
     })
   })
 
-  describe('#minimum_player_count', () => {
-    it("returns the game's minimum number of players", () => {
-      const game = new Game([], 3)
-      expect(game.minimum_player_count()).toEqual(3)
-    })
-  })
-
   describe('#startGame', () => {
     it('shuffles the deck', () => {
 
     })
 
     it('deals the cards', () => {
-      
+
     })
   })
 })
