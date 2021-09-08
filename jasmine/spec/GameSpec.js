@@ -82,5 +82,9 @@ describe('Game', () => {
       expect(game.players()[0].cards().length).toBeGreaterThan(0)
       expect(game.deck().cardsInDeck()).toBeLessThan(Deck.default_deck_size)
     })
+
+    it("doesn't start if it has already started once", () => {
+      
+    })
   })
 });
