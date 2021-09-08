@@ -11,6 +11,7 @@ describe('LoginView', () => {
       view.nameInput().value = expected_value
       view.submitButton().click()
       expect(calledWith).toEqual(expected_value)
+      container.remove()
     })
   })
 })

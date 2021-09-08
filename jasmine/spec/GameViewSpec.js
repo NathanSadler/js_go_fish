@@ -9,6 +9,7 @@ describe('GameView', () => {
       view.draw(container)
       expect(container.innerHTML).toContain("John")
       expect(container.innerHTML).toContain("Bob")
+      container.remove()
     })
 
     it('displays the cards in the hand of the first player', () => {
@@ -19,6 +20,7 @@ describe('GameView', () => {
       view.draw(container)
       expect(container.innerHTML).toContain("7 of Diamonds")
       expect(container.innerHTML).toContain("8 of Hearts")
+      container.remove()
     })
 
     it("doesn't display the cards of the players who are the first", () => {
@@ -29,6 +31,7 @@ describe('GameView', () => {
       view.draw(container)
       expect(container.innerHTML.includes("9 of Diamonds")).toBeFalse()
       expect(container.innerHTML.includes("10 of Hearts")).toBeFalse()
+      container.remove()
     })
   })
 })
