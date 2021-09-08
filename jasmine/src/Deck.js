@@ -3,6 +3,10 @@ class Deck {
     this._cards = card_list
   }
 
+  removeCard() {
+    return this._cards.shift()
+  }
+
   static defaultCards() {
     const card_list = []
     const suits = ['C', 'D', 'H', 'S']
