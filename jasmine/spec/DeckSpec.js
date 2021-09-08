@@ -26,4 +26,15 @@ describe('Deck', () => {
       expect(deck.removeCard()).toEqual(new Card("4", "D"))
     })
   })
+
+  // TODO: Write own random method
+  describe('#shuffle', () => {
+    it('shuffles the deck', () => {
+      deck_cards = []
+      for(let rank=2; rank<7; rank++) {deck_cards.push(new Card(rank.toString(), "D"))}
+      deck = new Deck([...deck_cards])
+      deck.shuffle()
+      expect(deck).not.toEqual(new Deck(deck_cards))
+    })
+  })
 })

@@ -13,6 +13,16 @@ class Deck {
     return this._cards.shift()
   }
 
+  // shoutouts to https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
+  shuffle() {
+    for(let i=this.cardsInDeck() - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      let temp = this._cards[j]
+      this._cards[j] = this._cards[i]
+      this._cards[i] = temp
+    }
+  }
+
   static defaultCards() {
     const card_list = []
     const suits = ['C', 'D', 'H', 'S']
