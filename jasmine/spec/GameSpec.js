@@ -90,9 +90,12 @@ describe('Game', () => {
     })
   })
 
-  describe('#startGame', () => {
-    xit('shuffles the deck', () => {
-
+  describe('#start', () => {
+    it('shuffles the deck', () => {
+      const game = new Game([], 5)
+      game.start()
+      expected_cards_in_deck = Deck.default_deck_size - (game.playerCount() * Game.starting_card_count_for_many_players)
+      expect(game.deck().cardsInDeck()).toEqual(expected_cards_in_deck)
     })
 
     it('deals the cards', () => {
