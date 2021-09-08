@@ -1,5 +1,4 @@
 class Game {
-  static default_deck_size = 52
   static many_players_threshold = 4
   static starting_card_count_for_few_players = 7
   static starting_card_count_for_many_players = 5
@@ -28,5 +27,6 @@ class Game {
   players() {
     return this._players
   }
+  
 
 }

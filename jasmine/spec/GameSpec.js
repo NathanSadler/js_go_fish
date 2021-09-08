@@ -37,7 +37,7 @@ describe('Game', () => {
       for(let i = 0; i<4; i++) {player_list.push(new Player('Player'))}
       const game = new Game(player_list)
       game.dealCards()
-      expect(game._deck._cards.length).toEqual(Game.default_deck_size - (Game.starting_card_count_for_many_players * 4))
+      expect(game._deck._cards.length).toEqual(Deck.default_deck_size - (Game.starting_card_count_for_many_players * 4))
     })
   })
 
@@ -64,7 +64,7 @@ describe('Game', () => {
     })
 
     it('deals the cards', () => {
-
+      
     })
   })
 })
