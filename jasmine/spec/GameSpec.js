@@ -41,6 +41,16 @@ describe('Game', () => {
     })
   })
 
+  describe('#deck', () => {
+    it('returns the deck of the game', () => {
+      const player1 = new Player('Player 1')
+      const player2 = new Player('Player 2')
+      const player_list = [player1, player2]
+      const game = new Game(player_list)
+      expect(game.deck()).toEqual(game._deck)
+    })
+  })
+
   describe('#minimum_player_count', () => {
     it("returns the game's minimum number of players", () => {
       const game = new Game([], 3)

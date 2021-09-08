@@ -20,6 +20,10 @@ class Game {
     }
   }
 
+  deck() {
+    return this._deck
+  }
+
   minimum_player_count() {
     return this._minimum_player_count
   }
