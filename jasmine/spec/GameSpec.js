@@ -67,11 +67,16 @@ describe('Game', () => {
   })
 
   describe('#players', () => {
+    let player1, player2, player_list, game
+
+    beforeEach(() => {
+       player2 = new Player('Player 2')
+       player1 = new Player('Player 1')
+       player_list = [player1, player2]
+       game = new Game(player_list)
+    })
+
     it('returns the list of the players in the game', () => {
-      const player1 = new Player('Player 1')
-      const player2 = new Player('Player 2')
-      const player_list = [player1, player2]
-      const game = new Game(player_list)
       expect(game.players()).toEqual(player_list)
     })
   })
@@ -84,7 +89,7 @@ describe('Game', () => {
   })
 
   describe('#startGame', () => {
-    it('shuffles the deck', () => {
+    xit('shuffles the deck', () => {
 
     })
 

@@ -23,14 +23,14 @@ describe('GameView', () => {
       container.remove()
     })
 
-    it("doesn't display the cards of the players who are the first", () => {
+    it("doesn't display the cards of the players who are not the first", () => {
       player_list[1]._cards = [new Card("9", "D"), new Card("10", "H")]
       const view = new GameView(new Game(player_list))
       const container = document.createElement('div')
       document.body.appendChild(container)
       view.draw(container)
-      expect(container.innerHTML.includes("9 of Diamonds")).toBeFalse()
-      expect(container.innerHTML.includes("10 of Hearts")).toBeFalse()
+      expect(container.innerHTML).not.toContain("9 of Diamonds")
+      expect(container.innerHTML).not.toContain("10 of Hearts")
       container.remove()
     })
   })
