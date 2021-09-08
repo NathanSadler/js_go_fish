@@ -21,8 +21,8 @@ class Deck {
       card_values.push(value.toString())
     }
 
-    for (let value in card_values) {
-      for(let suit in suits) {
+    for (let value of card_values) {
+      for(let suit of suits) {
         card_list.push(new Card(value, suit))
       }
     }

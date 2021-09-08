@@ -9,6 +9,7 @@ class GameView {
   }
 
   draw(container) {
+    this.game().start()
     container.innerHTML = ""
     const markup = 
     `
