@@ -90,8 +90,12 @@ describe('Game', () => {
       expect(game.deck().cardsInDeck()).toBeLessThan(Deck.default_deck_size)
     })
 
-    it('adds bot players if there are fewer than the minimum player count', () => {
-
+    describe('without enough players', () => {
+      it('adds bot players until there are enough players', () => {
+        const game = new Game([], 3)
+        game.start()
+        expect(game.playerCount()).toEqual(3)
+      })
     })
 
     it("doesn't start if it has already started once", () => {
