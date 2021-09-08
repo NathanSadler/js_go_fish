@@ -31,6 +31,8 @@ class Game {
   players() {
     return this._players
   }
-  
 
+  start() {
+    this.dealCards()
+  }
 }

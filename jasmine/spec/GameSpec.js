@@ -74,7 +74,13 @@ describe('Game', () => {
     })
 
     it('deals the cards', () => {
-      
+      const player1 = new Player('Player 1')
+      const player2 = new Player('Player 2')
+      const player_list = [player1, player2]
+      const game = new Game(player_list)
+      game.start()
+      expect(game.players()[0].cards().length).toBeGreaterThan(0)
+      expect(game.deck().cardsInDeck()).toBeLessThan(Deck.default_deck_size)
     })
   })
-})
+});
