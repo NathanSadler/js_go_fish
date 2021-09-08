@@ -9,6 +9,10 @@ class Game {
     this._deck = new Deck()
   }
 
+  addPlayer(player_to_add) {
+    this.players().push(player_to_add)
+  }
+
   dealCards() {
     const starting_card_count = (this.players().length < Game.many_players_threshold) ? 
       Game.starting_card_count_for_few_players : Game.starting_card_count_for_many_players

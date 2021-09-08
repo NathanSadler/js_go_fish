@@ -14,6 +14,14 @@ describe('Game', () => {
     })
   })
 
+  describe('#addPlayer', () => {
+    it('adds a player to the game', () => {
+      const game = new Game([new Player('Player 1')])
+      game.addPlayer(new Player('Player 2'))
+      expect(game.playerCount()).toEqual(2)
+    })
+  })
+
   describe('#dealCards', () => {
     it('gives everyone 7 cards if there are 3 or fewer players', () => {
       const player1 = new Player('Player 1')
