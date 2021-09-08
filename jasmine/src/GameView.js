@@ -8,7 +8,6 @@ class GameView {
     return this._game
   }
 
-  // This is just temporary. Will replace it when I figure out what I am doing  
   draw(container) {
     container.innerHTML = ""
     const markup = 
