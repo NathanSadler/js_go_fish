@@ -36,14 +36,8 @@ describe('Game', () => {
 
     })
 
-    describe('dealing the cards', () => {
-      it('gives each player seven cards if there are three or fewer players', () => {
-
-      })
-
-      it('gives each player five cards if there are four or more players', () => {
-        
-      })
+    it('deals the cards', () => {
+      
     })
   })
 })
