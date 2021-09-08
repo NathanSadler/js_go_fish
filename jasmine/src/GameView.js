@@ -10,6 +10,7 @@ class GameView {
 
   // This is just temporary. Will replace it when I figure out what I am doing  
   draw(container) {
+    container.innerHTML = ""
     const markup = 
     `
       <h1>Game</h1>
