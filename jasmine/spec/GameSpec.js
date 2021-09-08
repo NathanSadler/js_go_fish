@@ -83,8 +83,12 @@ describe('Game', () => {
       expect(game.deck().cardsInDeck()).toBeLessThan(Deck.default_deck_size)
     })
 
-    it("doesn't start if it has already started once", () => {
+    it('adds bot players if there are fewer than the minimum player count', () => {
       
+    })
+
+    it("doesn't start if it has already started once", () => {
+
     })
   })
 });
