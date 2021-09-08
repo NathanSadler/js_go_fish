@@ -2,7 +2,7 @@ describe('Deck', () => {
   describe('#constructor', () => {
     it('creates a deck of 52 cards', () => {
       deck = new Deck()
-      expect(deck.cardsInDeck).toBe(Deck.default_deck_size)
+      expect(deck.cardsInDeck()).toBe(Deck.default_deck_size)
     })
   })
 
