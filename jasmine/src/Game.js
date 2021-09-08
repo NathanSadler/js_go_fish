@@ -32,6 +32,10 @@ class Game {
     return this._players
   }
 
+  playerCount() {
+    return this.players().length
+  }
+
   start() {
     this.dealCards()
   }

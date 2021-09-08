@@ -68,6 +68,13 @@ describe('Game', () => {
     })
   })
 
+  describe('#playerCount', () => {
+    it('returns the number of players in the game', () => {
+      const game = new Game([new Player('Foo'), new Player('Bar')])
+      expect(game.playerCount()).toEqual(2)
+    })
+  })
+
   describe('#startGame', () => {
     it('shuffles the deck', () => {
 
@@ -84,7 +91,7 @@ describe('Game', () => {
     })
 
     it('adds bot players if there are fewer than the minimum player count', () => {
-      
+
     })
 
     it("doesn't start if it has already started once", () => {
