@@ -1,8 +1,24 @@
 class Game {
+  static default_deck_size = 52
+  static many_players_threshold = 4
+  static starting_card_count_for_few_players = 7
+  static starting_card_count_for_many_players = 5
+
   constructor(players, minimum_player_count = 2) {
     this._players = players
     this._minimum_player_count = minimum_player_count
     this._deck = new Deck()
+  }
+
+  dealCards() {
+    const starting_card_count = (this.players().length < Game.many_players_threshold) ? 
+      Game.starting_card_count_for_few_players : Game.starting_card_count_for_many_players
+
+    for(let i=0; i<starting_card_count; i++) {
+      for(let player of this._players) {
+        player.takeCard(this._deck.removeCard())
+      }
+    }
   }
 
   minimum_player_count() {
