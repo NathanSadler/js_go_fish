@@ -1,6 +1,12 @@
 class Deck {
+  static default_deck_size = 52
+
   constructor(card_list = Deck.defaultCards()) {
     this._cards = card_list
+  }
+
+  cardsInDeck() {
+    return this._cards.length
   }
 
   removeCard() {
