@@ -116,7 +116,7 @@ describe('Game', () => {
       })
     })
 
-    it("doesn't start if it has already started once", () => {
+    xit("doesn't start if it has already started once", () => {
 
     })
   })
