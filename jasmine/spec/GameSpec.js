@@ -23,27 +23,29 @@ describe('Game', () => {
   })
 
   describe('#dealCards', () => {
+    let game, player_list
+
+    beforeEach(() => {
+      player_list = [...Array(4)].map((_, index) => {return new Player(`Player ${index}`)})
+      game = new Game(player_list)
+    })
+    
     it('gives everyone 7 cards if there are 3 or fewer players', () => {
       const player1 = new Player('Player 1')
       const player2 = new Player('Player 2')
       const player_list = [player1, player2]
       const game = new Game(player_list)
       game.dealCards()
-      for(let player of player_list) {expect(player.cards().length).toBe(Game.starting_card_count_for_few_players)}
+      player_list.forEach((player) => {expect(player.cards().length).toBe(Game.starting_card_count_for_few_players)})
     })
 
     it('gives everyone 5 cards if there are 4 or more players', () => {
-      const player_list = []
-      for(let i = 0; i<4; i++) {player_list.push(new Player('Player'))}
       const game = new Game(player_list)
       game.dealCards()
-      for(let player of player_list) {expect(player.cards().length).toBe(Game.starting_card_count_for_many_players)}
+      player_list.forEach((player) => {expect(player.cards().length).toBe(Game.starting_card_count_for_many_players)})
     })
 
     it('removes the dealt cards from the deck', () => {
-      const player_list = []
-      for(let i = 0; i<4; i++) {player_list.push(new Player('Player'))}
-      const game = new Game(player_list)
       game.dealCards()
       expect(game._deck._cards.length).toEqual(Deck.default_deck_size - (Game.starting_card_count_for_many_players * 4))
     })

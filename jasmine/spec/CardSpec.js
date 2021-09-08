@@ -26,10 +26,14 @@ describe('Card', () => {
 
   describe('#describeRank', () => {
     it('returns the rank of the card unmodified if it is from 2 to 10', () => {
-      for(let card_rank = 2; card_rank < 11; card_rank++) {
+      // for(let card_rank = 2; card_rank < 11; card_rank++) {
+      //   card = new Card(card_rank.toString(), "D")
+      //   expect(card.describeRank()).toEqual(card_rank.toString())
+      // }
+      [...Array(9)].forEach((_, card_rank) => {
         card = new Card(card_rank.toString(), "D")
         expect(card.describeRank()).toEqual(card_rank.toString())
-      }
+      })
     })
 
     it('returns the name of the rank if it is not a number', () => {
@@ -42,10 +46,10 @@ describe('Card', () => {
     it("returns the name of the card's suit", () => {
       const possible_suits = ['C', 'D', 'H', 'S']
       const possible_suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
-      for(let i = 0; i < possible_suits.length; i++) {
-        card = new Card("4", possible_suits[i])
-        expect(card.describeSuit()).toEqual(possible_suit_names[i])
-      }
+      new Array(0, 1, 2, 3).forEach((_, index) => {
+        card = new Card("4", possible_suits[index])
+        expect(card.describeSuit()).toEqual(possible_suit_names[index])
+      })
     })
   })
 })

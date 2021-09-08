@@ -15,27 +15,28 @@ class Deck {
 
   // shoutouts to https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
   shuffle() {
-    for(let i=this.cardsInDeck() - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      let temp = this._cards[j]
-      this._cards[j] = this._cards[i]
-      this._cards[i] = temp
-    }
+    const indexes = [...Array(this.cardsInDeck() - 1)].map((_, index) => {return index + 1})
+    indexes.reverse().forEach((i) => {
+      const j = Math.floor(Math.random() * (i + 1));
+      let temp = this._cards[j];
+      this._cards[j] = this._cards[i];
+      this._cards[i] = temp;
+    })
   }
 
   static defaultCards() {
     const card_list = []
     const suits = ['C', 'D', 'H', 'S']
-    const card_values = ['A', 'J', 'Q', 'K']
-    for(let value = 2; value < 11; value++) {
-      card_values.push(value.toString())
-    }
+    const card_values = new Array('A', 'J', 'Q', 'K')
+    
+    // why does this need to be assigned to a variable to be happy?
+    const dummy = [...Array(9)].forEach((_, i) => {card_values.push((i + 2).toString())})
 
-    for (let value of card_values) {
-      for(let suit of suits) {
+    card_values.forEach((value) => {
+      suits.forEach((suit) => {
         card_list.push(new Card(value, suit))
-      }
-    }
+      })
+    })
 
     return card_list
   }

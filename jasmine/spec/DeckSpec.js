@@ -30,8 +30,10 @@ describe('Deck', () => {
   // TODO: Write own random method
   describe('#shuffle', () => {
     it('shuffles the deck', () => {
-      deck_cards = []
-      for(let rank=2; rank<7; rank++) {deck_cards.push(new Card(rank.toString(), "D"))}
+      deck_cards = [...Array(9)].map((_, rank) => {
+        return new Card((rank + 2).toString(), "D")
+      })
+    
       deck = new Deck([...deck_cards])
       deck.shuffle()
       expect(deck).not.toEqual(new Deck(deck_cards))

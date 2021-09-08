@@ -17,11 +17,9 @@ class Game {
     const starting_card_count = (this.players().length < Game.many_players_threshold) ? 
       Game.starting_card_count_for_few_players : Game.starting_card_count_for_many_players
 
-    for(let i=0; i<starting_card_count; i++) {
-      for(let player of this._players) {
-        player.takeCard(this._deck.removeCard())
-      }
-    }
+    const dummy = [...Array(starting_card_count)].forEach((_, i) => {
+      this._players.forEach((player) => {player.takeCard(this._deck.removeCard())})
+    })
   }
 
   deck() {
