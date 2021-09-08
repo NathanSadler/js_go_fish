@@ -42,7 +42,7 @@ class Game {
 
   start() {
     while (this.playerCount() < this.minimum_player_count()) {
-      this.addPlayer(new BotPlayer())
+      this.addPlayer(new BotPlayer(`Player ${this.playerCount() + 1} (Bot)`))
     }
     this.dealCards()
   }
