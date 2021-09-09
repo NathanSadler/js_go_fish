@@ -1,6 +1,11 @@
 describe('Card', () => {
+  let testCard
+
+  beforeEach(() => {
+    testCard = new Card("10", "H")
+  })
+
   describe('#constructor', () => {
-    
     it("sets the card's rank", () => {
       var card = new Card("4", "S")
       expect(card._rank).toEqual("4")
@@ -55,8 +60,19 @@ describe('Card', () => {
 
   describe('#generateId', () => {
     it("returns a string in the form of 'rank_suit'", () => {
-      const card = new Card("10", "H")
-      expect(card.generateId()).toEqual('10_H')
+      expect(testCard.generateId()).toEqual('10_H')
+    })
+  })
+
+  describe('#rank', () => {
+    it('returns the rank of the card', () => {
+      expect(testCard.rank()).toEqual("10")
+    })
+  })
+
+  describe('#suit', () => {
+    it('returns the suit of the card', () => {
+      expect(testCard.suit()).toEqual("H")
     })
   })
 })

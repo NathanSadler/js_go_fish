@@ -36,4 +36,12 @@ class Card {
   generateId() {
     return `${this._rank}_${this._suit}`
   }
+
+  rank() {
+    return this._rank
+  }
+
+  suit() {
+    return this._suit
+  }
 }
