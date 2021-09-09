@@ -1,10 +1,14 @@
 describe('Game', () => {
+  let player1, player2, player_list, game
+
+  beforeEach(() => {
+    player1 = new Player('Player 1')
+    player2 = new Player('Player 2')
+    player_list = [player1, player2]
+    game = new Game(player_list)
+  })
   describe('#constructor', () => {
     it("sets the players in the game", () => {
-      const player1 = new Player('Player 1')
-      const player2 = new Player('Player 2')
-      const player_list = [player1, player2]
-      const game = new Game(player_list)
       expect(game._players).toEqual(player_list)
     })
 
@@ -53,10 +57,6 @@ describe('Game', () => {
 
   describe('#deck', () => {
     it('returns the deck of the game', () => {
-      const player1 = new Player('Player 1')
-      const player2 = new Player('Player 2')
-      const player_list = [player1, player2]
-      const game = new Game(player_list)
       expect(game.deck()).toEqual(game._deck)
     })
   })
@@ -69,15 +69,6 @@ describe('Game', () => {
   })
 
   describe('#players', () => {
-    let player1, player2, player_list, game
-
-    beforeEach(() => {
-       player2 = new Player('Player 2')
-       player1 = new Player('Player 1')
-       player_list = [player1, player2]
-       game = new Game(player_list)
-    })
-
     it('returns the list of the players in the game', () => {
       expect(game.players()).toEqual(player_list)
     })
@@ -99,10 +90,6 @@ describe('Game', () => {
     })
 
     it('deals the cards', () => {
-      const player1 = new Player('Player 1')
-      const player2 = new Player('Player 2')
-      const player_list = [player1, player2]
-      const game = new Game(player_list)
       game.start()
       expect(game.players()[0].cards().length).toBeGreaterThan(0)
       expect(game.deck().cardsLeft()).toBeLessThan(Deck.default_deck_size)
@@ -119,5 +106,9 @@ describe('Game', () => {
     xit("doesn't start if it has already started once", () => {
 
     })
+  })
+
+  describe('#turnPlayer', () => {
+
   })
 });
