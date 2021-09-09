@@ -9,7 +9,6 @@ class GameView {
   }
 
   draw(container) {
-    
     container.innerHTML = ""
     const markup = 
     `
@@ -22,6 +21,11 @@ class GameView {
       <ul>
         ${this.game().players()[0].cards().map(card => `<li>${card.describe()}</li>`).join('')}
       </ul>
+      
+      <form class='turn-form'>
+        ${this.game().players().map(player => `<input type='radio' name='player_name' id='${player.name()}' value='${player.name()}'> <label for='${player.name()}'>${player.name()}</label><br>`).join('')}
+      </form>
+    
     `
     const element = document.createElement('div')
     element.innerHTML = markup
