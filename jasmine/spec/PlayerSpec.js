@@ -25,9 +25,21 @@ describe('Player', () => {
     })
   })
 
-  describe('#removeCard', () => {
-    it("removes a card from the player's hand", () => {
+  describe('#removeCardsWithRank', () => {
+    beforeEach(() => {
+      const card_list = [new Card("4", "D"), new Card('4', 'H'), new Card("5", "D"), new Card("6", "D")]
+      player._cards = card_list
+    })
 
+    it("removes cards with a specific rank from the player's hand", () => {
+      const expected_cards = [new Card("5", "D"), new Card("6", "D")]
+      player.removeCardsWithRank("4")
+      expect(player.cards()).toEqual(expected_cards)
+    })
+
+    it("returns an array of the cards that got removed from the player's hand", () => {
+      const expected_cards = [new Card("4", "D"), new Card('4', 'H')]
+      expect(player.removeCardsWithRank("4")).toEqual(expected_cards)
     })
   })
 
