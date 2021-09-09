@@ -52,9 +52,18 @@ describe('Player', () => {
   })
 
   describe('#takeCard', () => {
+    let test_card
+    beforeEach(() => {
+      test_card = new Card('7', 'D')
+    })
+
     it('gives a card to the player', () => {
-      player.takeCard(new Card("7", "D"))
-      expect(player.cards()).toEqual([new Card("7", "D")])
+      player.takeCard(test_card)
+      expect(player.cards()).toEqual([test_card])
+    })
+
+    it('returns the cards the player took', () => {
+      expect(player.takeCard(test_card)).toEqual(test_card)
     })
   })
 })

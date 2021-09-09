@@ -25,5 +25,6 @@ class Player {
 
   takeCard(taken_card) {
     this._cards.push(taken_card)
+    return taken_card
   }
 }
