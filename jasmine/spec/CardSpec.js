@@ -52,4 +52,11 @@ describe('Card', () => {
       })
     })
   })
+
+  describe('#generateId', () => {
+    it("returns a string in the form of 'rank_suit'", () => {
+      const card = new Card("10", "H")
+      expect(card.generateId()).toEqual('10_H')
+    })
+  })
 })

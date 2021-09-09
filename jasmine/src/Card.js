@@ -32,4 +32,8 @@ class Card {
   describe() {
     return `${this.describeRank()} of ${this.describeSuit()}`
   }
+
+  generateId() {
+    return `${this._rank}_${this._suit}`
+  }
 }
