@@ -13,7 +13,7 @@ describe('Game', () => {
     })
 
     it("sets the minimum number of players", () => {
-      const game = new Game([], 3)
+      const game = new Game([new Player('Hello World')], 3)
       expect(game._minimum_player_count).toEqual(3)
     })
   })
@@ -63,7 +63,7 @@ describe('Game', () => {
 
   describe('#minimum_player_count', () => {
     it("returns the game's minimum number of players", () => {
-      const game = new Game([], 3)
+      const game = new Game([new Player('Hello World')], 3)
       expect(game.minimum_player_count()).toEqual(3)
     })
   })
@@ -83,7 +83,7 @@ describe('Game', () => {
 
   describe('#start', () => {
     it('shuffles the deck', () => {
-      const game = new Game([], 5)
+      const game = new Game([new Player('Hello World')], 5)
       game.start()
       expected_cards_in_deck = Deck.default_deck_size - (game.playerCount() * Game.starting_card_count_for_many_players)
       expect(game.deck().cardsLeft()).toEqual(expected_cards_in_deck)
@@ -97,7 +97,7 @@ describe('Game', () => {
 
     describe('without enough players', () => {
       it('adds bot players until there are enough players', () => {
-        const game = new Game([], 3)
+        const game = new Game([new Player('hello world')], 3)
         game.start()
         expect(game.playerCount()).toEqual(3)
       })
@@ -108,7 +108,9 @@ describe('Game', () => {
     })
   })
 
-  describe('#turnPlayer', () => {
+  describe('#turnPlayerIndex', () => {
+    it('returns the turn player index of the game', () => {
 
+    })
   })
 });
