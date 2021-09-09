@@ -16,6 +16,11 @@ class GoFishController {
     view.draw(this.container())
   }
 
+  loadGame(game) {
+    const view = new GameView(game)
+    view.draw(this.container())
+  }
+
   // container is one element HTML that gets updated with JS
 }
 
