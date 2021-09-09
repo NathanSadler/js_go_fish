@@ -42,6 +42,7 @@ class Game {
     while (this.playerCount() < this.minimum_player_count()) {
       this.addPlayer(new BotPlayer(`Player ${this.playerCount() + 1} (Bot)`))
     }
+    this.deck().shuffle()
     this.dealCards()
   }
 }
