@@ -58,6 +58,28 @@ describe('Card', () => {
     })
   })
 
+  describe('#equals', () => {
+    let comparisonCard
+
+    beforeEach(() => {
+      comparisonCard = new Card('10', 'H')
+    })
+
+    it('is true if the ranks and suits of both cards match', () => {
+      expect(testCard.equals(comparisonCard)).toBeTrue()
+    })
+
+    it("is false if the cards' ranks aren't the same", () => {
+      comparisonCard._rank = '9'
+      expect(testCard.equals(comparisonCard)).toBeFalse()
+    })
+
+    it("is false if the cards' suits aren't the same", () => {
+      comparisonCard._suit = 'D'
+      expect(testCard.equals(comparisonCard)).toBeFalse()
+    })
+  })
+
   describe('#generateId', () => {
     it("returns a string in the form of 'rank_suit'", () => {
       expect(testCard.generateId()).toEqual('10_H')

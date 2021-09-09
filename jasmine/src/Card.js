@@ -33,6 +33,11 @@ class Card {
     return `${this.describeRank()} of ${this.describeSuit()}`
   }
 
+  equals(other_card) {
+    if (this.rank() == other_card.rank() && this.suit() == other_card.suit()) {return true}
+    return false
+  }
+
   generateId() {
     return `${this._rank}_${this._suit}`
   }
