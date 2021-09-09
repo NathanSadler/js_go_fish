@@ -6,7 +6,7 @@ class Deck {
   }
 
   // TODO: rename this to cardsLeft
-  cardsInDeck() {
+  cardsLeft() {
     return this._cards.length
   }
 
@@ -16,7 +16,7 @@ class Deck {
 
   // shoutouts to https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
   shuffle() {
-    const indexes = [...Array(this.cardsInDeck() - 1)].map((_, index) => index + 1)
+    const indexes = [...Array(this.cardsLeft() - 1)].map((_, index) => index + 1)
     indexes.reverse().forEach((i) => {
       const j = Math.floor(Math.random() * (i + 1));
       let temp = this._cards[j];

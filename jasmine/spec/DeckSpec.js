@@ -2,15 +2,15 @@ describe('Deck', () => {
   describe('#constructor', () => {
     it('creates a deck of 52 cards', () => {
       deck = new Deck()
-      expect(deck.cardsInDeck()).toBe(Deck.default_deck_size)
+      expect(deck.cardsLeft()).toBe(Deck.default_deck_size)
     })
   })
 
-  describe('#cardsInDeck', () => {
+  describe('#cardsLeft', () => {
     it('returns the number of cards in the deck', () => {
       deck = new Deck()
       deck.removeCard()
-      expect(deck.cardsInDeck()).toEqual(Deck.default_deck_size - 1)
+      expect(deck.cardsLeft()).toEqual(Deck.default_deck_size - 1)
     })
   })
 

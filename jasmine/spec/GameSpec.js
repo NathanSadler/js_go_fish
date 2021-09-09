@@ -95,7 +95,7 @@ describe('Game', () => {
       const game = new Game([], 5)
       game.start()
       expected_cards_in_deck = Deck.default_deck_size - (game.playerCount() * Game.starting_card_count_for_many_players)
-      expect(game.deck().cardsInDeck()).toEqual(expected_cards_in_deck)
+      expect(game.deck().cardsLeft()).toEqual(expected_cards_in_deck)
     })
 
     it('deals the cards', () => {
@@ -105,7 +105,7 @@ describe('Game', () => {
       const game = new Game(player_list)
       game.start()
       expect(game.players()[0].cards().length).toBeGreaterThan(0)
-      expect(game.deck().cardsInDeck()).toBeLessThan(Deck.default_deck_size)
+      expect(game.deck().cardsLeft()).toBeLessThan(Deck.default_deck_size)
     })
 
     describe('without enough players', () => {
