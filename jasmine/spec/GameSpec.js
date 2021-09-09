@@ -82,6 +82,16 @@ describe('Game', () => {
     })
   })
 
+  xdescribe('#playTurn', () => {
+    describe('a user correctly asking someone for a card of a specific rank', () => {
+
+    })
+
+    describe('a user incorrectly asking someone for a card of a specific rank', () => {
+
+    })
+  })
+
   describe('#start', () => {
     it('shuffles the deck', () => {
       const game = new Game([new Player('Hello World')], 5)
