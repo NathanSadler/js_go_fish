@@ -33,8 +33,10 @@ describe('Deck', () => {
       deck_cards = [...Array(9)].map((_, rank) => {
         return new Card((rank + 2).toString(), "D")
       })
+
+      deck_cards_clone = [...deck_cards]
     
-      deck = new Deck([...deck_cards])
+      deck = new Deck(deck_cards_clone)
       deck.shuffle()
       expect(deck).not.toEqual(new Deck(deck_cards))
     })
