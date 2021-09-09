@@ -47,6 +47,20 @@ class Game {
     return this.players().length
   }
 
+  playTurn(requesting_player, requested_player, requested_rank) {
+    const taken_cards = requested_player.removeCardsWithRank(requested_rank)
+    taken_cards.forEach(card => requesting_player.takeCard(card))
+    
+    if (taken_cards.length == 0){
+      const card_from_deck = requesting_player.takeCard(this._deck.removeCard())
+
+      if(card_from_deck.rank() != requested_rank) {
+        this._turnPlayerIndex++
+      }
+      
+    }
+  }
+
   start() {
     while (this.playerCount() < this.minimum_player_count()) {
       this.addPlayer(new BotPlayer(`Player ${this.playerCount() + 1} (Bot)`))

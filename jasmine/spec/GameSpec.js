@@ -82,13 +82,49 @@ describe('Game', () => {
     })
   })
 
-  xdescribe('#playTurn', () => {
-    describe('a user correctly asking someone for a card of a specific rank', () => {
+  describe('#playTurn', () => {
+    beforeEach(() => {
+      player1.setHand([new Card("4", "D"), new Card("5", "D"), new Card("7", "D"), new Card("8", "D")])
+      player2.setHand([new Card("4", "S"), new Card("4", "C"), new Card("4", "H"), new Card("6", "D")])
+      game._deck._cards = [new Card("8", "S"), new Card("9", "S"), new Card('10', 'S')]
+    })
 
+    describe('a user correctly asking someone for a card of a specific rank', () => {
+      beforeEach(() => game.playTurn(game.players()[0], game.players()[1], '4'))
+
+      it('takes the cards of the requested rank from whoever got asked', () => {
+        expect(game.players()[1].cards()).toEqual([new Card("6", "D")])
+      })
+
+      it('gives the cards that were taken from the requested player to the requesting player', () => {
+        [new Card("4", "S"), new Card("4", "C"), new Card("4", "H")].forEach(card => 
+          expect(player1.cards()).toContain(card))
+      })
+
+      it("doesn't increment the turn player index", () => {
+        expect(game.turnPlayerIndex()).toEqual(0)
+      })
+
+      it("doesn't make the player draw a card", () => {
+        expect(player1.cards()).not.toContain(new Card('8', 'S'))
+      })
     })
 
     describe('a user incorrectly asking someone for a card of a specific rank', () => {
+      it('makes the asking player draw a card from the deck', () => {
+        game.playTurn(game.players()[0], game.players()[1], '7')
+        expect(player1.cards()).toContain(new Card("8", "S"))
+      })
 
+      it("doesn't increment the turn player index if the asking player gets a card of the rank they asked for from the deck", () => {
+        game.playTurn(game.players()[0], game.players()[1], '8')
+        expect(game.turnPlayerIndex()).toEqual(0)
+      })
+
+      it("increments the turn player index if the asking player doesn't get a card of the rank they asked for from the deck", () => {
+        game.playTurn(game.players()[0], game.players()[1], '7')
+        expect(game.turnPlayerIndex()).toEqual(1)
+      })
     })
   })
 
