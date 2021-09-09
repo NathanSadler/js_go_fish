@@ -19,6 +19,10 @@ class Player {
     return lost_cards
   }
 
+  setHand(new_hand) {
+    this._cards = new_hand
+  }
+
   takeCard(taken_card) {
     this._cards.push(taken_card)
   }

@@ -43,6 +43,14 @@ describe('Player', () => {
     })
   })
 
+  describe('#setHand', () => {
+    it("sets the cards in the player's hand", () => {
+      expected_cards = [new Card("4", "H"), new Card("5", "H")]
+      player.setHand(expected_cards)
+      expect(player.cards()).toEqual(expected_cards)
+    })
+  })
+
   describe('#takeCard', () => {
     it('gives a card to the player', () => {
       player.takeCard(new Card("7", "D"))
