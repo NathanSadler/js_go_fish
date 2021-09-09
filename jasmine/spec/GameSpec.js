@@ -114,4 +114,20 @@ describe('Game', () => {
       expect(game.turnPlayerIndex()).toEqual(0)
     })
   })
+
+  describe('#incrementTurnPlayerIndex', () => {
+    it('increments the turn player index', () => {
+      game.incrementTurnPlayerIndex()
+      expect(game.turnPlayerIndex()).toEqual(1)
+    })
+
+    it('resets the turn player index to 0 if the index would go out of bounds', () => {
+      Array.from(Array(2)).forEach((_, i) => game.incrementTurnPlayerIndex())
+      expect(game.turnPlayerIndex()).toEqual(0)
+    })
+
+    it('returns the new turn player index', () => {
+      expect(game.incrementTurnPlayerIndex()).toEqual(1)
+    })
+  })
 });

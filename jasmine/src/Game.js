@@ -27,6 +27,14 @@ class Game {
     return this._deck
   }
 
+  incrementTurnPlayerIndex() {
+    this._turnPlayerIndex++
+    if(this.turnPlayerIndex() >= this.playerCount()) {
+      this._turnPlayerIndex = 0
+    }
+    return this.turnPlayerIndex()
+  }
+
   minimum_player_count() {
     return this._minimum_player_count
   }
