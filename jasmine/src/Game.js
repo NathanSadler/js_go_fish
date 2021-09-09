@@ -7,6 +7,7 @@ class Game {
     this._players = players
     this._minimum_player_count = minimum_player_count
     this._deck = new Deck()
+    this._turnPlayerIndex = 0
   }
 
   addPlayer(player_to_add) {
@@ -44,5 +45,9 @@ class Game {
     }
     this.deck().shuffle()
     this.dealCards()
+  }
+
+  turnPlayerIndex() {
+    return this._turnPlayerIndex
   }
 }

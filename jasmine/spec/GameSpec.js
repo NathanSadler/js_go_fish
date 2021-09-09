@@ -7,6 +7,7 @@ describe('Game', () => {
     player_list = [player1, player2]
     game = new Game(player_list)
   })
+
   describe('#constructor', () => {
     it("sets the players in the game", () => {
       expect(game._players).toEqual(player_list)
@@ -110,7 +111,7 @@ describe('Game', () => {
 
   describe('#turnPlayerIndex', () => {
     it('returns the turn player index of the game', () => {
-
+      expect(game.turnPlayerIndex()).toEqual(0)
     })
   })
 });
