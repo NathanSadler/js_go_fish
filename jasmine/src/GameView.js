@@ -52,9 +52,9 @@ class GameView {
 
     const requested_player_index = Number(event.target.player_name.value)
 
-    this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
+    // this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
 
-    console.log('onSubmit was called')
+    this.controller().playTurn(this._game, this._game.turnPlayerIndex(), requested_player_index, requested_rank)
   }
 
   playerButton(playerIndex) {
