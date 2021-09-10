@@ -67,6 +67,14 @@ describe('Player', () => {
     })
   })
 
+  describe('#score', () => {
+    it('returns the score of the player', () => {
+      expected_score = 4
+      player._score = expected_score
+      expect(player.score()).toEqual(expected_score)
+    })
+  })
+
   describe('#setHand', () => {
     it("sets the cards in the player's hand", () => {
       expected_cards = [new Card("4", "H"), new Card("5", "H")]

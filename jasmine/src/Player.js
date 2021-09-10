@@ -2,6 +2,7 @@ class Player {
   constructor(name) {
     this._name = name;
     this._cards = [];
+    this._score = 0
   }
 
   cards() {
@@ -30,6 +31,10 @@ class Player {
     const lost_cards = this._cards.filter(card => card.rank() == rank)
     this._cards = kept_cards
     return lost_cards
+  }
+
+  score() {
+    return this._score
   }
 
   setHand(new_hand) {
