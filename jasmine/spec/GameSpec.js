@@ -90,7 +90,7 @@ describe('Game', () => {
     })
 
     describe('a user correctly asking someone for a card of a specific rank', () => {
-      beforeEach(() => game.playTurn(game.players()[0], game.players()[1], '4'))
+      beforeEach(() => game.playTurn(0, 1, '4'))
 
       it('takes the cards of the requested rank from whoever got asked', () => {
         expect(game.players()[1].cards()).toEqual([new Card("6", "D")])
@@ -112,17 +112,17 @@ describe('Game', () => {
 
     describe('a user incorrectly asking someone for a card of a specific rank', () => {
       it('makes the asking player draw a card from the deck', () => {
-        game.playTurn(game.players()[0], game.players()[1], '7')
+        game.playTurn(0, 1, '7')
         expect(player1.cards()).toContain(new Card("8", "S"))
       })
 
       it("doesn't increment the turn player index if the asking player gets a card of the rank they asked for from the deck", () => {
-        game.playTurn(game.players()[0], game.players()[1], '8')
+        game.playTurn(0, 1, '8')
         expect(game.turnPlayerIndex()).toEqual(0)
       })
 
       it("increments the turn player index if the asking player doesn't get a card of the rank they asked for from the deck", () => {
-        game.playTurn(game.players()[0], game.players()[1], '7')
+        game.playTurn(0, 1, '7')
         expect(game.turnPlayerIndex()).toEqual(1)
       })
     })

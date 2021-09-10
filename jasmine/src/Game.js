@@ -47,7 +47,11 @@ class Game {
     return this.players().length
   }
 
-  playTurn(requesting_player, requested_player, requested_rank) {
+  playTurn(requesting_player_index, requested_player_index, requested_rank) {
+    // use the given indexes to get the players
+    const requesting_player = this.players()[requesting_player_index]
+    const requested_player = this.players()[requested_player_index]
+
     const taken_cards = requested_player.removeCardsWithRank(requested_rank)
     taken_cards.forEach(card => requesting_player.takeCard(card))
     

@@ -12,6 +12,10 @@ class GameView {
     return document.getElementById(cardId)
   }
 
+  controller() {
+    return window.controller
+  }
+
   draw(container) {
     container.innerHTML = ""
     const markup = 
@@ -27,7 +31,7 @@ class GameView {
       </ul>
       
       <form class='turn-form'>
-        ${this.game().players().map(player => `<input type='radio' name='player_name' id='${player.name()}' value='${player.name()}'> <label for='${player.name()}'>${player.name()}</label><br>`).join('')}
+        ${this.game().players().map((player, index) => `<input type='radio' name='player_name' id='${index}' value='${index}'> <label for='${index}'>${player.name()}</label><br>`).join('')}
         ${this.game().players()[0].cards().map(card => `<input type='radio' name='card' id='${card.generateId()}' value=${card.generateId()}> <label for='${card.generateId()}'>${card.describe()}</label><br>`).join('')}
         <input type="submit" id="submit"></input>
       </form>    
@@ -41,11 +45,20 @@ class GameView {
 
   onSubmit(event) {
     event.preventDefault()
+    let regex = new RegExp('_')
+
+    const requested_rank_index = event.target.card.value.search(regex)
+    const requested_rank = event.target.card.value.slice(0, requested_rank_index)
+
+    const requested_player_index = Number(event.target.player_name.value)
+
+    this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
+
     console.log('onSubmit was called')
   }
 
-  playerButton(playerName) {
-    return document.getElementById(playerName)
+  playerButton(playerIndex) {
+    return document.getElementById(playerIndex.toString())
   }
 
   submitButton() {

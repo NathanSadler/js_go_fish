@@ -49,12 +49,14 @@ describe('GameView', () => {
       document.body.appendChild(container)
       view.draw(container)
 
-      view.playerButton(game.players()[1].name()).click()
+      view.playerButton(1).click()
       view.cardButton("7_D").click()
       view.submitButton().click()
 
       expect(game.players()[0].cards()).toEqual([new Card('7', 'D'), new Card('7', 'H')])
       container.remove()
     })
+
+    
   })
 })
