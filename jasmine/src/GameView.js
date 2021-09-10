@@ -8,6 +8,10 @@ class GameView {
     return this._game
   }
 
+  cardButton(cardId) {
+    return document.getElementById(cardId)
+  }
+
   draw(container) {
     container.innerHTML = ""
     const markup = 
@@ -38,6 +42,14 @@ class GameView {
   onSubmit(event) {
     event.preventDefault()
     console.log('onSubmit was called')
+  }
+
+  playerButton(playerName) {
+    return document.getElementById(playerName)
+  }
+
+  submitButton() {
+    return document.querySelector('input[type="submit"]')
   }
   
 }
