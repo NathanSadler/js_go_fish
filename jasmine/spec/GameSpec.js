@@ -62,6 +62,17 @@ describe('Game', () => {
     })
   })
 
+  describe('#getIndexOfPlayer', () => {
+    it('returns the index of a given player', () => {
+      expect(game.getIndexOfPlayer(player2)).toEqual(1)
+    })
+
+    it('returns -1 if the given player is not in the game', () => {
+      const player3 = new Player('Player 3')
+      expect(game.getIndexOfPlayer(player3)).toEqual(-1)
+    })
+  })
+
   describe('#minimum_player_count', () => {
     it("returns the game's minimum number of players", () => {
       const game = new Game([new Player('Hello World')], 3)
@@ -174,6 +185,15 @@ describe('Game', () => {
 
     it('returns the new turn player index', () => {
       expect(game.incrementTurnPlayerIndex()).toEqual(1)
+    })
+
+    it('makes a bot player take their turn', () => {
+      botPlayer = new BotPlayer('Bot Player')
+      botPlayer._cards = [new Card('7', 'H')]
+      game.addPlayer(botPlayer)
+      game._turnPlayerIndex = 1
+      game.incrementTurnPlayerIndex()
+      expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D')])
     })
   })
 });

@@ -27,11 +27,24 @@ class Game {
     return this._deck
   }
 
+  getIndexOfPlayer(targetPlayer) {
+    let playerIndex = -1
+    this.players().forEach((player, thisIndex) => {
+      if(player.equals(targetPlayer)){
+        playerIndex = thisIndex
+      }})
+
+    return playerIndex
+  }
+
   incrementTurnPlayerIndex() {
     this._turnPlayerIndex++
+    
+    // reset turn player index if it goes too high
     if(this.turnPlayerIndex() >= this.playerCount()) {
       this._turnPlayerIndex = 0
     }
+
     return this.turnPlayerIndex()
   }
 
