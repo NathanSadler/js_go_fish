@@ -45,6 +45,11 @@ class Game {
       this._turnPlayerIndex = 0
     }
 
+    if(this.turnPlayer() instanceof BotPlayer) {
+      let bot = this.turnPlayer()
+      this.playTurn(this.turnPlayerIndex(), bot.selectPlayerToAskIndex(this), bot.selectRankToAskFor(this))
+    }
+
     return this.turnPlayerIndex()
   }
 

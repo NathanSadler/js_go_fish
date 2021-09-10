@@ -4,6 +4,8 @@ describe('Game', () => {
   beforeEach(() => {
     player1 = new Player('Player 1')
     player2 = new Player('Player 2')
+    player1.setHand([new Card("4", "D"), new Card("5", "D"), new Card("7", "D"), new Card("8", "D")])
+    player2.setHand([new Card("4", "S"), new Card("4", "C"), new Card("4", "H"), new Card("6", "D")])
     player_list = [player1, player2]
     game = new Game(player_list)
   })
@@ -95,8 +97,6 @@ describe('Game', () => {
 
   describe('#playTurn', () => {
     beforeEach(() => {
-      player1.setHand([new Card("4", "D"), new Card("5", "D"), new Card("7", "D"), new Card("8", "D")])
-      player2.setHand([new Card("4", "S"), new Card("4", "C"), new Card("4", "H"), new Card("6", "D")])
       game._deck._cards = [new Card("8", "S"), new Card("9", "S"), new Card('10', 'S')]
     })
 
