@@ -4,9 +4,11 @@ describe('GameView', () => {
   beforeEach(() => {
     player_list = [new Player("John"), new Player("Bob")]
   })
+  
 
   describe('displaying players in a game', () => {
     it('lists the names of players in the game', () => {
+      document.getElementById('main').innerHTML = ''
       const view = new GameView(new Game(player_list))
       const container = document.createElement('div')
       document.body.appendChild(container)
@@ -17,6 +19,7 @@ describe('GameView', () => {
     })
 
     it('displays the cards in the hand of the first player', () => {
+      document.getElementById('main').innerHTML = ''
       player_list[0]._cards = [new Card("7", "D"), new Card("8", "H")]
       const view = new GameView(new Game(player_list))
       const container = document.createElement('div')
@@ -28,6 +31,7 @@ describe('GameView', () => {
     })
 
     it("doesn't display the cards of the players who are not the first", () => {
+      document.getElementById('main').innerHTML = ''
       player_list[1]._cards = [new Card("9", "D"), new Card("10", "H")]
       const view = new GameView(new Game(player_list))
       const container = document.createElement('div')
@@ -41,6 +45,7 @@ describe('GameView', () => {
 
   describe('taking a turn', () => {
     it('lets users take a turn', () => {
+      document.getElementById('main').innerHTML = ''
       game = new Game(player_list)
       game.players()[0]._cards = [new Card('7', 'D')]
       game.players()[1]._cards = [new Card('7', 'H'), new Card('8', 'H')]
@@ -54,7 +59,7 @@ describe('GameView', () => {
       view.playerButton(1).click()
       view.cardButton("7_D").click()
       view.submitButton().click()
-
+      
       expect(game.players()[0].cards()).toEqual([new Card('7', 'D'), new Card('7', 'H')])
       container.remove()
     })

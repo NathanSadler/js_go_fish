@@ -3,6 +3,7 @@ describe('LoginView', () => {
     it("calls a passed-in function using the logged in player's name", () => {
       const expected_value = 'Foobar'
       let calledWith
+      document.getElementById('main').innerHTML = ''
       const onLogin = (name) => {calledWith = name}
       const view = new LoginView(onLogin)
       const container = document.createElement('div')
@@ -16,6 +17,7 @@ describe('LoginView', () => {
 
     it("doesn't do anything if it isn't given a name", () => {
       let submitted = false
+      document.getElementById('main').innerHTML = ''
       const onLogin = () => {submitted = true}
       const view = new LoginView(onLogin)
       const container = document.createElement('div')
