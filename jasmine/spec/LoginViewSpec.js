@@ -13,5 +13,18 @@ describe('LoginView', () => {
       expect(calledWith).toEqual(expected_value)
       container.remove()
     })
+
+    it("doesn't do anything if it isn't given a name", () => {
+      let submitted = false
+      const onLogin = () => {submitted = true}
+      const view = new LoginView(onLogin)
+      const container = document.createElement('div')
+      document.body.appendChild(container)
+      view.draw(container)
+      view.nameInput().value = ''
+      view.submitButton().click()
+      expect(submitted).toBeFalse()
+      container.remove()
+    })
   })
 })
