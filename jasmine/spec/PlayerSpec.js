@@ -19,6 +19,30 @@ describe('Player', () => {
     })
   })
 
+  describe('#equals', () => {
+    let comparisonPlayer
+
+    beforeEach(() => {
+      comparisonPlayer = new Player('Player')
+      player._cards = [new Card('7', 'H'), new Card('8', 'H')]
+      comparisonPlayer._cards = [new Card('7', 'H'), new Card('8', 'H')]
+    })
+
+    it('is true if the names and cards of both players are the same', () => {
+      expect(player.equals(comparisonPlayer)).toBeTrue()
+    })
+
+    it('is false if the names of both players are not the same', () => {
+      comparisonPlayer._name = 'Other Player'
+      expect(player.equals(comparisonPlayer)).toBeFalse()
+    })
+
+    it('is false if the cards of both players are not the same', () => {
+      comparisonPlayer._cards = [new Card('9', 'H')]
+      expect(player.equals(comparisonPlayer)).toBeFalse()
+    })
+  })
+
   describe('#name', () => {
     it("returns the player's name", () => {
       expect(player.name()).toEqual('Player')

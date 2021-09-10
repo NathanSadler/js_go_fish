@@ -8,6 +8,19 @@ class Player {
     return this._cards
   }
 
+  equals(otherPlayer) {
+    const sameNames = this.name() == otherPlayer.name()
+    let sameCards = true
+
+    if(this.cards().length == otherPlayer.cards().length) {
+      this.cards().forEach((_, index) => {
+        if (!this.cards()[index].equals(otherPlayer.cards()[index])) {sameCards = false}
+      })
+    } else {sameCards = false}
+
+    return (sameNames && sameCards)
+  }
+
   name() {
     return this._name;
   }
