@@ -1,7 +1,7 @@
 describe('LoginView', () => {
   describe('form submit', () => {
     it("calls a passed-in function using the logged in player's name", () => {
-      expected_value = 'Foobar'
+      const expected_value = 'Foobar'
       let calledWith
       const onLogin = (name) => {calledWith = name}
       const view = new LoginView(onLogin)
