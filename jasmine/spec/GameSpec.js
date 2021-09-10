@@ -166,6 +166,13 @@ describe('Game', () => {
     })
   })
 
+  describe('#turnPlayer', () => {
+    it('returns the player whose turn it is', () => {
+      game.incrementTurnPlayerIndex()
+      expect(game.turnPlayer()).toEqual(player2)
+    })
+  })
+
   describe('#turnPlayerIndex', () => {
     it('returns the turn player index of the game', () => {
       expect(game.turnPlayerIndex()).toEqual(0)

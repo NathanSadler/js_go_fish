@@ -86,6 +86,10 @@ class Game {
     this.dealCards()
   }
 
+  turnPlayer() {
+    return this.players()[this._turnPlayerIndex]
+  }
+
   turnPlayerIndex() {
     return this._turnPlayerIndex
   }
