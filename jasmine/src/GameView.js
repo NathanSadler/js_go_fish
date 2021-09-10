@@ -12,9 +12,10 @@ class GameView {
     return document.getElementById(cardId)
   }
 
-  controller() {
-    return window.controller
-  }
+  // This doesn't exist in the tests. I guess that makes sense
+  // controller() {
+  //   return window.controller
+  // }
 
   draw(container) {
     container.innerHTML = ""
@@ -45,16 +46,20 @@ class GameView {
 
   onSubmit(event) {
     event.preventDefault()
+    // Get values needed for the playTurn method
     let regex = new RegExp('_')
-
     const requested_rank_index = event.target.card.value.search(regex)
     const requested_rank = event.target.card.value.slice(0, requested_rank_index)
-
     const requested_player_index = Number(event.target.player_name.value)
 
-    // this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
+    // Play the turn
+   this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
+   
+   // make new view with updated game
+   const view = new GameView(this._game)
 
-    this.controller().playTurn(this._game, this._game.turnPlayerIndex(), requested_player_index, requested_rank)
+   // display new updated view
+   view.draw(document.getElementById('main'))
   }
 
   playerButton(playerIndex) {

@@ -44,10 +44,12 @@ describe('GameView', () => {
       game = new Game(player_list)
       game.players()[0]._cards = [new Card('7', 'D')]
       game.players()[1]._cards = [new Card('7', 'H'), new Card('8', 'H')]
-      const view = new GameView(new Game(player_list))
+      const view = new GameView(game)
       const container = document.createElement('div')
       document.body.appendChild(container)
       view.draw(container)
+      
+      expect(game.players()[0].cards()).toEqual([new Card('7', 'D')])
 
       view.playerButton(1).click()
       view.cardButton("7_D").click()
