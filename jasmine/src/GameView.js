@@ -24,7 +24,7 @@ class GameView {
       <h1>Game</h1>
       <h2>Players</h2>
       <ul>
-        ${this.game().players().map(player => `<li>${player.name()}</li>`).join('')}
+        ${this.game().players().map(player => `<li>${player.name()}- ${player.cards().length} card(s)</li>`).join('')}
       </ul>
       <h2>Your Cards</h2>
       <ul>
