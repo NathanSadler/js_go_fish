@@ -159,6 +159,34 @@ describe('Game', () => {
     })
   })
 
+  describe('#setTurnPlayerIndexToNextValidPlayer', () => {
+    let player3
+
+    beforeEach(() => {
+      player3 = new Player('Player 3')
+      player3.setHand([new Card('Q', 'H')])
+      game.addPlayer(player3)
+      game._turnPlayerIndex = 0
+    })
+
+    describe('there are still cards in the deck', () => {
+      it("sets the turn player index to the next player's", () => {
+        game.deck()._cards = [new Card('7', 'D')]
+        game.setTurnPlayerIndexToNextValidPlayer()
+        expect(game.turnPlayerIndex()).toEqual(1)
+      })
+    })
+
+    describe('there are no more cards in the deck', () => {
+      it('sets the turn player index to the index of the next player that still has cards', () => {
+        game.deck()._cards = []
+        player2.setHand([])
+        game.setTurnPlayerIndexToNextValidPlayer()
+        expect(game.turnPlayerIndex()).toEqual(2)
+      })
+    })
+  })
+
   describe('#players', () => {
     it('returns the list of the players in the game', () => {
       expect(game.players()).toEqual(player_list)

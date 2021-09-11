@@ -75,6 +75,17 @@ class Game {
     }
   }
 
+  setTurnPlayerIndexToNextValidPlayer() {
+    if(!this.deck().cardsLeft() == 0) {
+      this.incrementTurnPlayerIndex()
+    }
+    // If there are no more cards in the deck, increment the turn player index until reaching a player that still has cards
+    else {
+      this.incrementTurnPlayerIndex()
+      while(this.turnPlayer().cards().length == 0) {this.incrementTurnPlayerIndex()}
+    }
+  }
+
   players() {
     return this._players
   }
