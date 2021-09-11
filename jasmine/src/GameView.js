@@ -52,6 +52,10 @@ class GameView {
     const requested_rank = event.target.card.value.slice(0, requested_rank_index)
     const requested_player_index = Number(event.target.player_name.value)
 
+    if (requested_player_index != 0 && requested_player_index != 1) {
+      debugger
+    }
+
     // Play the turn
    this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
    

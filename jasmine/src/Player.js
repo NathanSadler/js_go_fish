@@ -9,6 +9,10 @@ class Player {
     return this._cards
   }
 
+  countCardsWithRank(rank) {
+    return this.getCardsWithRank(rank).length
+  }
+
   equals(otherPlayer) {
     const sameNames = this.name() == otherPlayer.name()
     let sameCards = true
@@ -20,6 +24,10 @@ class Player {
     } else {sameCards = false}
 
     return (sameNames && sameCards)
+  }
+
+  getCardsWithRank(rank) {
+    return this.cards().filter(card => card.rank() == rank)
   }
 
   name() {
@@ -43,6 +51,14 @@ class Player {
 
   takeCard(taken_card) {
     this._cards.push(taken_card)
+
+    const taken_card_rank = taken_card.rank()
+
+    if(this.countCardsWithRank(taken_card_rank) == 4) {
+      this._score += 1
+      this.removeCardsWithRank(taken_card_rank)
+    }
+    
     return taken_card
   }
 }

@@ -19,6 +19,15 @@ describe('Player', () => {
     })
   })
 
+  describe('#countCardsWithRank', () => {
+    it('returns the number of cards a player has with a given rank', () => {
+      player._cards = [new Card("4", "D"), new Card("4", "S"), new Card("5", "D")]
+      expect(player.countCardsWithRank('4')).toEqual(2)
+      expect(player.countCardsWithRank('5')).toEqual(1)
+      expect(player.countCardsWithRank('K')).toEqual(0)
+    })
+  })
+
   describe('#equals', () => {
     let comparisonPlayer
 
@@ -40,6 +49,14 @@ describe('Player', () => {
     it('is false if the cards of both players are not the same', () => {
       comparisonPlayer._cards = [new Card('9', 'H')]
       expect(player.equals(comparisonPlayer)).toBeFalse()
+    })
+  })
+
+  describe('#getCardsWithRank', () => {
+    it("returns an array of the player's cards that have a specified rank", () => {
+      player._cards = [new Card("4", "D"), new Card("4", "S"), new Card("5", "D")]
+      expect(player.getCardsWithRank('4')).toEqual([new Card("4", "D"), new Card("4", "S")])
+      expect(player.getCardsWithRank('J')).toEqual([])
     })
   })
 
@@ -96,6 +113,21 @@ describe('Player', () => {
 
     it('returns the cards the player took', () => {
       expect(player.takeCard(test_card)).toEqual(test_card)
+    })
+
+    describe('getting a book', () => {
+      beforeEach(() => {
+        ['H', 'C', 'S'].forEach(suit => player.takeCard(new Card('7', suit))) 
+        player.takeCard(test_card)
+      })
+
+      it('increases the score of the player', () => {
+        expect(player.score()).toEqual(1)
+      })
+
+      it("removes the cards that make up the book from the player's hand", () => {
+        expect(player.cards()).toEqual([])
+      })
     })
   })
 })

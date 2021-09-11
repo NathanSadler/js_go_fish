@@ -101,14 +101,17 @@ describe('Game', () => {
     })
 
     describe('a user correctly asking someone for a card of a specific rank', () => {
-      beforeEach(() => game.playTurn(0, 1, '4'))
+      beforeEach(() => {
+        game.players()[0]._cards.push(new Card('6', 'H'))
+        game.playTurn(0, 1, '6')
+      })
 
       it('takes the cards of the requested rank from whoever got asked', () => {
-        expect(game.players()[1].cards()).toEqual([new Card("6", "D")])
+        expect(game.players()[1].cards()).not.toContain(new Card('6', 'D'))
       })
 
       it('gives the cards that were taken from the requested player to the requesting player', () => {
-        [new Card("4", "S"), new Card("4", "C"), new Card("4", "H")].forEach(card => 
+        [new Card("6", "H"), new Card("6", "D")].forEach(card => 
           expect(player1.cards()).toContain(card))
       })
 

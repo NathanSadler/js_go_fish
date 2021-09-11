@@ -67,8 +67,13 @@ class Game {
 
   playTurn(requesting_player_index, requested_player_index, requested_rank) {
     // use the given indexes to get the players
+    
     const requesting_player = this.players()[requesting_player_index]
     const requested_player = this.players()[requested_player_index]
+
+    if (requesting_player === undefined || requesting_player == null) {
+      debugger
+    }
 
     const taken_cards = requested_player.removeCardsWithRank(requested_rank)
     taken_cards.forEach(card => requesting_player.takeCard(card))
@@ -77,7 +82,7 @@ class Game {
       const card_from_deck = requesting_player.takeCard(this._deck.removeCard())
 
       if(card_from_deck.rank() != requested_rank) {
-        this._turnPlayerIndex++
+        this.incrementTurnPlayerIndex()
       }
       
     }
