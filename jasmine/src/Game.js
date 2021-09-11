@@ -8,6 +8,7 @@ class Game {
     this._minimum_player_count = minimum_player_count
     this._deck = new Deck()
     this._turnPlayerIndex = 0
+    this._turnResults = []
   }
 
   addPlayer(player_to_add) {
@@ -67,25 +68,30 @@ class Game {
 
   playTurn(requesting_player_index, requested_player_index, requested_rank) {
     // use the given indexes to get the players
-    
     const requesting_player = this.players()[requesting_player_index]
     const requested_player = this.players()[requested_player_index]
 
-    if (requesting_player === undefined || requesting_player == null) {
-      debugger
-    }
+    let receivedCards
+    let cardSource = requested_player
 
-    const taken_cards = requested_player.removeCardsWithRank(requested_rank)
-    taken_cards.forEach(card => requesting_player.takeCard(card))
+    // give cards taken from asked player to asking player
+    receivedCards = requested_player.removeCardsWithRank(requested_rank)
+    receivedCards.forEach(card => requesting_player.takeCard(card))
     
-    if (taken_cards.length == 0){
-      const card_from_deck = requesting_player.takeCard(this._deck.removeCard())
+    if (receivedCards.length == 0){
+      // draw a card from the deck if no cards were taken from another player
+      receivedCards = [requesting_player.takeCard(this._deck.removeCard())]
+      cardSource = "the deck"
 
-      if(card_from_deck.rank() != requested_rank) {
+      // increment the turn player index if the drawn card wasn't of the requested rank
+      if(receivedCards[0].rank() != requested_rank) {
         this.incrementTurnPlayerIndex()
-      }
-      
+      }    
     }
+
+    // save the turn result
+    this._turnResults.push(new TurnResult(this, requesting_player_index, requested_player_index, requested_rank, receivedCards, cardSource))
+
   }
 
   start() {
@@ -102,5 +108,9 @@ class Game {
 
   turnPlayerIndex() {
     return this._turnPlayerIndex
+  }
+
+  turnResults() {
+    return this._turnResults
   }
 }

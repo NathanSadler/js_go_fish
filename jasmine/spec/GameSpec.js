@@ -100,6 +100,13 @@ describe('Game', () => {
       game._deck._cards = [new Card("8", "S"), new Card("9", "S"), new Card('10', 'S')]
     })
 
+    it('saves the results of the turn', () => {
+      game.players()[0]._cards.push(new Card('6', 'H'))
+      game.playTurn(0, 1, '6')
+      const result = new TurnResult(game, 0, 1, '6', [new Card('6', 'D')], player2)
+      expect(game.turnResults()).toContain(result)
+    })
+
     describe('a user correctly asking someone for a card of a specific rank', () => {
       beforeEach(() => {
         game.players()[0]._cards.push(new Card('6', 'H'))
@@ -179,6 +186,14 @@ describe('Game', () => {
   describe('#turnPlayerIndex', () => {
     it('returns the turn player index of the game', () => {
       expect(game.turnPlayerIndex()).toEqual(0)
+    })
+  })
+
+  describe('#turnResults', () => {
+    it("returns this game's turn results", () => {
+      result = new TurnResult(game, 0, 1, '4', [new Card("4", "S"), new Card("4", "C"), new Card("4", "H")], player2)
+      game._turnResults = [result]
+      expect(game.turnResults()).toEqual([result])
     })
   })
 
