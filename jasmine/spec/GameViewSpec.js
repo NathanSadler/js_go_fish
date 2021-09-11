@@ -39,7 +39,7 @@ describe('GameView', () => {
     })
   })
 
-  describe('displaying turn results', () => {
+  xdescribe('displaying turn results', () => {
     it('displays turn results', () => {
       document.getElementById('main').innerHTML = ''
       game = new Game(player_list)
@@ -78,7 +78,7 @@ describe('GameView', () => {
 
     it('lets users take a turn', () => {
       expect(game.players()[0].cards()).toEqual([new Card('Q', 'S'), new Card('7', 'D'), new Card('7', 'H')])
-      // container.remove()
+      container.remove()
     })
 
     
