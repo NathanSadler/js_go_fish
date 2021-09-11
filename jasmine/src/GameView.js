@@ -8,8 +8,8 @@ class GameView {
     return this._game
   }
 
-  cardButton(cardId) {
-    return document.getElementById(cardId)
+  cardSelectionBox() {
+    return document.getElementById('card')
   }
 
   // This doesn't exist in the tests. I guess that makes sense
@@ -32,8 +32,13 @@ class GameView {
       </ul>
       
       <form class='turn-form'>
-        ${this.game().players().map((player, index) => `<input type='radio' name='player_name' id='${index}' value='${index}'> <label for='${index}'>${player.name()}</label><br>`).join('')}
-        ${this.game().players()[0].cards().map(card => `<input type='radio' name='card' id='${card.generateId()}' value=${card.generateId()}> <label for='${card.generateId()}'>${card.describe()}</label><br>`).join('')}
+        <select name="player_name" id="player_name">
+          ${this.game().players().map((player, index) => `<option value="${index}">${player.name()}</option>`).join('')}
+        </select>
+
+        <select name='card' id='card'>
+          ${this.game().players()[0].cards().map(card => `<option value='${card.generateId()}'>${card.describe()}</option>`).join('')}
+        </select>
         <input type="submit" id="submit"></input>
       </form>    
     `
@@ -66,8 +71,8 @@ class GameView {
    view.draw(document.getElementById('main'))
   }
 
-  playerButton(playerIndex) {
-    return document.getElementById(playerIndex.toString())
+  playerSelectionBox() {
+    return document.getElementById('player_name')
   }
 
   submitButton() {
