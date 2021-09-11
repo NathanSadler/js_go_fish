@@ -24,6 +24,13 @@ class TurnResult {
     return this._game
   }
 
+  gotRequestedRank() {
+    if(this.receivedCards().length == 0 || this.receivedCards()[0].rank() != this.requestedRank()) {
+      return false
+    }
+    return true
+  }
+
   message() {
     const whoAskedWhoForWhat = `${this.requestingPlayer().name()} asked ${this.requestedPlayer().name()} for ${this.requestedRank()}s`
     let message

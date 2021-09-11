@@ -63,6 +63,22 @@ describe('TurnResult', () => {
     })
   })
 
+  describe('#gotRequestedRank', () => {
+    it('is true when the rank of the first received card matches the requested rank', () => {
+      expect(testTurnResult.gotRequestedRank()).toBeTrue()
+    })
+
+    it('is false when the rank of the first received card does not match the requested rank', () => {
+      testTurnResult._receivedCards = [new Card('K', 'C')]
+      expect(testTurnResult.gotRequestedRank()).toBeFalse()
+    })
+
+    it('is false when the asking player does not receive any cards', () => {
+      testTurnResult._receivedCards = []
+      expect(testTurnResult.gotRequestedRank()).toBeFalse()
+    })
+  })
+
   describe('#message', () => {
     describe('the asking player correctly asking another for a card of a specific rank', () => {
       it("returns a message in the format '<asking player> asked <asked player> for <rank>s and got <number of won cards> of them.", () => {
