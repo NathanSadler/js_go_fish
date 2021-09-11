@@ -1,15 +1,15 @@
 describe('TurnResult', () => {
-  let testTurnResult, testGame, testPlayer1, testPlayer2, testPlayer3, receivedCards, requestedRank, cardSourceName
+  let testTurnResult, testGame, testPlayer1, testPlayer2, testPlayer3, receivedCards, requestedRank, cardSource
 
   beforeEach(() => {
     testPlayer1 = new Player('Player 1')
     testPlayer2 = new Player('Player 2')
     testPlayer3 = new Player('Player 3')
     requestedRank = '7'
-    cardSourceName = testPlayer2.name()
+    cardSource = testPlayer2
     testGame = new Game([testPlayer1, testPlayer2])
     receivedCards = [new Card(requestedRank, 'H'), new Card(requestedRank, 'D')]
-    testTurnResult = new TurnResult(testGame, 0, 1, requestedRank, receivedCards, cardSourceName)
+    testTurnResult = new TurnResult(testGame, 0, 1, requestedRank, receivedCards, cardSource)
   })
 
   describe('#constructor', () => {
@@ -34,13 +34,24 @@ describe('TurnResult', () => {
     })
 
     it('sets the card source name', () => {
-      expect(testTurnResult._cardSourceName).toEqual(cardSourceName)
+      expect(testTurnResult._cardSource).toEqual(cardSource)
+    })
+  })
+
+  describe('#cardSource', () => {
+    it('returns the card source', () => {
+      expect(testTurnResult.cardSource()).toEqual(cardSource)
     })
   })
 
   describe('#cardSourceName', () => {
-    it('returns the card source name', () => {
-      expect(testTurnResult.cardSourceName()).toEqual(cardSourceName)
+    it('returns the name of the player if the source is a player', () => {
+      expect(testTurnResult.cardSourceName()).toEqual(testPlayer2.name())
+    })
+
+    it('returns the raw card source if it is not a player', () => {
+      testTurnResult._cardSource = 'the deck'
+      expect(testTurnResult.cardSourceName()).toEqual('the deck')
     })
   })
   
@@ -49,6 +60,45 @@ describe('TurnResult', () => {
       const dummy_game = new Game([new Player('Player 3')])
       testTurnResult._game = dummy_game
       expect(testTurnResult.game()).toEqual(dummy_game)
+    })
+  })
+
+  describe('#message', () => {
+    describe('the asking player correctly asking another for a card of a specific rank', () => {
+      it("returns a message in the format '<asking player> asked <asked player> for <rank>s and got <number of won cards> of them.", () => {
+        const message = 'Player 1 asked Player 2 for 7s and got 2 of them.'
+        expect(testTurnResult.message()).toEqual(message)
+      })
+    })
+
+    describe('the asked player not having the requested rank', () => {
+      beforeEach(() => {
+        testTurnResult._cardSource = "the deck"
+      })
+
+      xdescribe('the asking player draws one with that rank from the deck', () => {
+        it("returns a message in the format '<asking player> asked <asked player> for <rank>s and drew one from the deck.", () => {
+          testTurnResult._receivedCards = [new Card('7', 'C')]
+          const message = 'Player 1 asked Player 2 for 7s and drew one from the deck.'
+          expect(testTurnResult.message()).toEqual(message)
+        })
+      })
+  
+      describe('the asking player drawing a card with a different rank', () => {
+        it("returns a message in the format '<asking player> asked <asked player> for <ranks> and drew a card from the deck.'", () => {
+          testTurnResult._receivedCards = [new Card('8', 'C')]
+          const message = 'Player 1 asked Player 2 for 7s and drew a card from the deck.'
+          expect(testTurnResult.message()).toEqual(message)
+        })
+      })
+
+      describe('the asking player not getting any cards', () => {
+        it("returns a message in the format '<asking player> asked <asked player> for <rank>s but didn't get any cards.'", () => {
+          testTurnResult._receivedCards = []
+          const message = "Player 1 asked Player 2 for 7s but didn't get any cards."
+          expect(testTurnResult.message()).toEqual(message)
+        })
+      })
     })
   })
 
