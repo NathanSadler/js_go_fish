@@ -1,14 +1,15 @@
 describe('TurnResult', () => {
-  let testTurnResult, testGame, testPlayer1, testPlayer2, testPlayer3, receivedCards, requestedRank
+  let testTurnResult, testGame, testPlayer1, testPlayer2, testPlayer3, receivedCards, requestedRank, cardSourceName
 
   beforeEach(() => {
     testPlayer1 = new Player('Player 1')
     testPlayer2 = new Player('Player 2')
     testPlayer3 = new Player('Player 3')
     requestedRank = '7'
+    cardSourceName = testPlayer2.name()
     testGame = new Game([testPlayer1, testPlayer2])
     receivedCards = [new Card(requestedRank, 'H'), new Card(requestedRank, 'D')]
-    testTurnResult = new TurnResult(testGame, 0, 1, requestedRank, receivedCards)
+    testTurnResult = new TurnResult(testGame, 0, 1, requestedRank, receivedCards, cardSourceName)
   })
 
   describe('#constructor', () => {
@@ -30,6 +31,16 @@ describe('TurnResult', () => {
 
     it('sets the received cards', () => {
       expect(testTurnResult._receivedCards).toEqual(receivedCards)
+    })
+
+    it('sets the card source name', () => {
+      expect(testTurnResult._cardSourceName).toEqual(cardSourceName)
+    })
+  })
+
+  describe('#cardSourceName', () => {
+    it('returns the card source name', () => {
+      expect(testTurnResult.cardSourceName()).toEqual(cardSourceName)
     })
   })
   

@@ -1,10 +1,15 @@
 class TurnResult {
-  constructor(game, requestingPlayerIndex, requestedPlayerIndex, requestedRank, receivedCards) {
+  constructor(game, requestingPlayerIndex, requestedPlayerIndex, requestedRank, receivedCards, cardSourceName) {
     this._game = game
     this._requestingPlayerIndex = requestingPlayerIndex
     this._requestedPlayerIndex = requestedPlayerIndex
     this._requestedRank = requestedRank
     this._receivedCards = receivedCards
+    this._cardSourceName = cardSourceName
+  }
+
+  cardSourceName() {
+    return this._cardSourceName
   }
 
   game() {
