@@ -75,6 +75,26 @@ describe('Game', () => {
     })
   })
 
+  describe('#isOver', () => {
+    it('is true if no players have any cards in their hand and there are no cards in the deck', () => {
+      [player1, player2].forEach(player => player.setHand([]))
+      game.deck()._cards = []
+      expect(game.isOver()).toBeTrue()
+    })
+
+    it('is false if ANY players still have cards in their hands', () => {
+      player1.setHand([])
+      game.deck()._cards = []
+      expect(game.isOver()).toBeFalse()
+    })
+
+    it('is false if there are any cards in the deck', () => {
+      [player1, player2].forEach(player => player.setHand([]))
+      game.deck()._cards = [new Card("J", "8")]
+      expect(game.isOver()).toBeFalse()
+    })
+  })
+
   describe('#minimum_player_count', () => {
     it("returns the game's minimum number of players", () => {
       const game = new Game([new Player('Hello World')], 3)
@@ -253,26 +273,5 @@ describe('Game', () => {
       expect(game.turnPlayerIndex()).toEqual(0)
     })
     
-    // describe('it being the turn of a bot player', () => {
-    //   let botPlayer
-
-    //   beforeEach(() => {
-    //     botPlayer = new BotPlayer('Bot Player')
-    //     botPlayer._cards = [new Card('7', 'H')]
-    //     game.addPlayer(botPlayer)
-    //     game.deck()._cards = [new Card('Q', 'C')]
-    //     game._turnPlayerIndex = 1
-    //   })
-
-    //   it('makes a bot player take their turn', () => {
-    //     game.incrementTurnPlayerIndex()
-    //     expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D'), new Card('Q', 'C')])
-    //   })
-
-    //   it('properly sets the turn player index when a bot is finished with their turn', () => {
-    //     game.incrementTurnPlayerIndex()
-    //     expect(game.turnPlayerIndex()).toEqual(0)
-    //   })
-    // })
   })
 });

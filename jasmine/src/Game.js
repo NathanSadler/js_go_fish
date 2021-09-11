@@ -48,6 +48,15 @@ class Game {
 
   }
 
+  isOver() {
+    let allPlayersHaveNoCards = true
+    this.players().forEach(player => {
+      if(player.cards().length > 0) {allPlayersHaveNoCards = false}
+    })
+
+    return (allPlayersHaveNoCards && this.deck().cardsLeft() == 0)
+  }
+
   minimum_player_count() {
     return this._minimum_player_count
   }
