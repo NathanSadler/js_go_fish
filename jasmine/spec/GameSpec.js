@@ -82,6 +82,51 @@ describe('Game', () => {
     })
   })
 
+  describe('#nextPlay', () => {
+    beforeEach(() => {
+      game._turnPlayerIndex = 0
+    })
+
+    describe('a player getting the rank of card they asked for', () => {
+      it('does not increment the turn player index', () => {
+        game._turnResults.push(new TurnResult(game, 1, 2, '8', [new Card('8', 'H')], 'the deck'))
+        game.nextPlay()
+        expect(game.turnPlayerIndex()).toEqual(0)
+      })
+    })
+
+    describe('a player not getting the rank of card they asked for', () => {
+      it('increments the turn player index', () => {
+        game._turnResults.push(new TurnResult(game, 1, 2, '8', [new Card('9', 'H')], 'the deck'))
+        game.nextPlay()
+        expect(game.turnPlayerIndex()).toEqual(1)
+      })
+    })
+
+    describe('it being the turn of a bot player', () => {
+      let botPlayer
+
+      beforeEach(() => {
+        botPlayer = new BotPlayer('Bot Player')
+        botPlayer._cards = [new Card('7', 'H')]
+        game.addPlayer(botPlayer)
+        game._turnResults.push(new TurnResult(game, 1, 2, '3', [new Card('4', 'S')], 'the deck'))
+        game.deck()._cards = [new Card('Q', 'C')]
+        game._turnPlayerIndex = 1
+      })
+
+      it('makes a bot player take their turn', () => {
+        game.nextPlay()
+        expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D'), new Card('Q', 'C')])
+      })
+
+      it('properly sets the turn player index when a bot is finished with their turn', () => {
+        game.nextPlay()
+        expect(game.turnPlayerIndex()).toEqual(0)
+      })
+    })
+  })
+
   describe('#players', () => {
     it('returns the list of the players in the game', () => {
       expect(game.players()).toEqual(player_list)
@@ -207,18 +252,27 @@ describe('Game', () => {
       Array.from(Array(2)).forEach((_, i) => game.incrementTurnPlayerIndex())
       expect(game.turnPlayerIndex()).toEqual(0)
     })
+    
+    // describe('it being the turn of a bot player', () => {
+    //   let botPlayer
 
-    it('returns the new turn player index', () => {
-      expect(game.incrementTurnPlayerIndex()).toEqual(1)
-    })
+    //   beforeEach(() => {
+    //     botPlayer = new BotPlayer('Bot Player')
+    //     botPlayer._cards = [new Card('7', 'H')]
+    //     game.addPlayer(botPlayer)
+    //     game.deck()._cards = [new Card('Q', 'C')]
+    //     game._turnPlayerIndex = 1
+    //   })
 
-    it('makes a bot player take their turn', () => {
-      botPlayer = new BotPlayer('Bot Player')
-      botPlayer._cards = [new Card('7', 'H')]
-      game.addPlayer(botPlayer)
-      game._turnPlayerIndex = 1
-      game.incrementTurnPlayerIndex()
-      expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D')])
-    })
+    //   it('makes a bot player take their turn', () => {
+    //     game.incrementTurnPlayerIndex()
+    //     expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D'), new Card('Q', 'C')])
+    //   })
+
+    //   it('properly sets the turn player index when a bot is finished with their turn', () => {
+    //     game.incrementTurnPlayerIndex()
+    //     expect(game.turnPlayerIndex()).toEqual(0)
+    //   })
+    // })
   })
 });

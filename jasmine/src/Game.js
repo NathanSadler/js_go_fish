@@ -46,16 +46,22 @@ class Game {
       this._turnPlayerIndex = 0
     }
 
-    if(this.turnPlayer() instanceof BotPlayer) {
-      let bot = this.turnPlayer()
-      this.playTurn(this.turnPlayerIndex(), bot.selectPlayerToAskIndex(this), bot.selectRankToAskFor(this))
-    }
-
-    return this.turnPlayerIndex()
   }
 
   minimum_player_count() {
     return this._minimum_player_count
+  }
+
+  nextPlay() {
+    // increment the turn player index if the player didn't get the rank of card they asked for
+    if(!this.turnResults()[this.turnResults().length - 1].gotRequestedRank()) {
+      this.incrementTurnPlayerIndex()
+    }
+
+    if(this.turnPlayer() instanceof BotPlayer) {
+      let bot = this.turnPlayer()
+      this.playTurn(this.turnPlayerIndex(), bot.selectPlayerToAskIndex(this), bot.selectRankToAskFor(this))
+    }
   }
 
   players() {
@@ -81,18 +87,15 @@ class Game {
     if (receivedCards.length == 0){
       // draw a card from the deck if no cards were taken from another player
       receivedCards = [requesting_player.takeCard(this._deck.removeCard())]
-      cardSource = "the deck"
-
-      // increment the turn player index if the drawn card wasn't of the requested rank
-      if(receivedCards[0].rank() != requested_rank) {
-        this.incrementTurnPlayerIndex()
-      }    
+      cardSource = "the deck"    
     }
 
     // save the turn result
     this._turnResults.push(new TurnResult(this, requesting_player_index, requested_player_index, requested_rank, receivedCards, cardSource))
 
-  } 
+    this.nextPlay()
+
+  }
 
   start() {
     while (this.playerCount() < this.minimum_player_count()) {
