@@ -92,7 +92,7 @@ class Game {
     // save the turn result
     this._turnResults.push(new TurnResult(this, requesting_player_index, requested_player_index, requested_rank, receivedCards, cardSource))
 
-  }
+  } 
 
   start() {
     while (this.playerCount() < this.minimum_player_count()) {

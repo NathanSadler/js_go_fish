@@ -22,14 +22,23 @@ class GameView {
     const markup = 
     `
       <h1>Game</h1>
-      <h2>Players</h2>
-      <ul>
-        ${this.game().players().map(player => `<li>${player.name()}- ${player.cards().length} card(s)</li>`).join('')}
-      </ul>
-      <h2>Your Cards</h2>
-      <ul>
-        ${this.game().players()[0].cards().map(card => `<li>${card.describe()}</li>`).join('')}
-      </ul>
+      <p>It is ${this.game().turnPlayer().name()}'s turn</p>
+      <div style='display:flex; flex-direction:row'>
+        <div>
+          <h2>Players</h2>
+          <ul>
+            ${this.game().players().map(player => `<li>${player.name()}- ${player.cards().length} card(s)</li>`).join('')}
+          </ul>
+        </div>
+
+        <div id='turn_results'>
+          <h2>Turn Results</h2>
+          <ul>
+            ${this.game().turnResults().map(result => `<li>${result.message()}</li>`).join('')}
+          </ul>
+        </div>
+        
+      </div>
       
       <form class='turn-form'>
         <select name="player_name" id="player_name">
