@@ -41,10 +41,22 @@ describe('TurnResult', () => {
     })
   })
 
+  describe('#requestedPlayer', () => {
+    it('returns the requested player', () => {
+      expect(testTurnResult.requestedPlayer()).toEqual(testPlayer2)
+    })
+  })
+
   describe('#requestedPlayerIndex', () => {
     it('returns the requested player index', () => {
       testTurnResult._requestedPlayerIndex = 99
       expect(testTurnResult.requestedPlayerIndex()).toEqual(99)
+    })
+  })
+
+  describe('#requestingPlayer', () => {
+    it('returns the requesting player', () => {
+      expect(testTurnResult.requestingPlayer()).toEqual(testPlayer1)
     })
   })
 

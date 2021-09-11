@@ -15,8 +15,16 @@ class TurnResult {
     return this._receivedCards
   }
 
+  requestedPlayer() {
+    return this.game().players()[this.requestedPlayerIndex()]
+  }
+
   requestedPlayerIndex() {
     return this._requestedPlayerIndex
+  }
+
+  requestingPlayer() {
+    return this.game().players()[this.requestingPlayerIndex()]
   }
 
   requestingPlayerIndex() {
