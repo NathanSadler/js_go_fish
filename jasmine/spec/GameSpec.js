@@ -107,6 +107,18 @@ describe('Game', () => {
       game._turnPlayerIndex = 0
     })
 
+    it("doesn't do anything if the game is over", () => {
+      // makes game over
+      [player1, player2].forEach(player => player.setHand([]))
+      game.deck()._cards = []
+
+      // puts game in state where it would normally increment the turn player index
+      game._turnResults.push(new TurnResult(game, 1, 2, '8', [], 'the deck'))
+
+      game.nextPlay()
+      expect(game.turnPlayerIndex()).toEqual(0)
+    })
+
     describe('a player getting the rank of card they asked for', () => {
       it('does not increment the turn player index', () => {
         game._turnResults.push(new TurnResult(game, 1, 2, '8', [new Card('8', 'H')], 'the deck'))

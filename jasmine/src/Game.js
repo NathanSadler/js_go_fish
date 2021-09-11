@@ -45,7 +45,6 @@ class Game {
     if(this.turnPlayerIndex() >= this.playerCount()) {
       this._turnPlayerIndex = 0
     }
-
   }
 
   isOver() {
@@ -62,6 +61,9 @@ class Game {
   }
 
   nextPlay() {
+    // stop if the game is over
+    if(this.isOver()) {return}
+
     // increment the turn player index if the player didn't get the rank of card they asked for
     if(!this.turnResults()[this.turnResults().length - 1].gotRequestedRank()) {
       this.incrementTurnPlayerIndex()
