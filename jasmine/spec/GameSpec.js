@@ -135,6 +135,16 @@ describe('Game', () => {
       })
     })
 
+    describe('the current turn player not having any cards while there are still cards in the deck', () => {
+      let player3
+      beforeEach(() => {
+        player3 = new BotPlayer('Player 3')
+        game.addPlayer(player3)
+        player3.setHand([])
+        
+      })
+    })
+
     describe('it being the turn of a bot player', () => {
       let botPlayer
 

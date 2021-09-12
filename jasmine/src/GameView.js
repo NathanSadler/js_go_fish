@@ -19,43 +19,58 @@ class GameView {
 
   draw(container) {
     container.innerHTML = ""
-    const markup = 
-    `
-      <h1>Game</h1>
-      <p>It is ${this.game().turnPlayer().name()}'s turn</p>
-      <div style='display:flex; flex-direction:row'>
-        <div>
-          <h2>Players</h2>
-          <ul>
-            ${this.game().players().map(player => `<li>${player.name()}- ${player.cards().length} card(s)</li>`).join('')}
-          </ul>
-        </div>
-
-        <div id='turn_results'>
-          <h2>Turn Results</h2>
-          <ul>
-            ${this.game().turnResults().map(result => `<li>${result.message()}</li>`).join('')}
-          </ul>
-        </div>
-        
-      </div>
-      
-      <form class='turn-form'>
-        <select name="player_name" id="player_name">
-          ${this.game().players().map((player, index) => `<option value="${index}">${player.name()}</option>`).join('')}
-        </select>
-
-        <select name='card' id='card'>
-          ${this.game().players()[0].cards().map(card => `<option value='${card.generateId()}'>${card.describe()}</option>`).join('')}
-        </select>
-        <input type="submit" id="submit"></input>
-      </form>    
-    `
+    const markup = this.game().isOver() ? this.gameOverScreenMarkup() : this.mainScreenMarkup()
     const element = document.createElement('div')
     element.innerHTML = markup
     element.onsubmit = this.onSubmit.bind(this)
     container.appendChild(element)
     return element
+  }
+
+  gameOverScreenMarkup() {
+    const markup = `
+    <h1>Game Over</h1>
+    <ul>
+      ${this.game().players().map(player => `<li>${player.name()}- ${player.score()} book(s)</li>`).join('')}
+    </ul>
+    `
+    return markup
+  }
+
+  mainScreenMarkup() {
+    const markup = `
+    <h1>Game</h1>
+    <p>It is ${this.game().turnPlayer().name()}'s turn</p>
+    <div style='display:flex; flex-direction:row'>
+      <div>
+        <h2>Players</h2>
+        <ul>
+          ${this.game().players().map(player => `<li>${player.name()}- ${player.cards().length} card(s)</li>`).join('')}
+        </ul>
+      </div>
+
+      <div id='turn_results'>
+        <h2>Turn Results</h2>
+        <ul>
+          ${this.game().turnResults().map(result => `<li>${result.message()}</li>`).join('')}
+        </ul>
+      </div>
+      
+    </div>
+    
+    <form class='turn-form'>
+      <select name="player_name" id="player_name">
+        ${this.game().players().map((player, index) => `<option value="${index}">${player.name()}</option>`).join('')}
+      </select>
+
+      <select name='card' id='card'>
+        ${this.game().players()[0].cards().map(card => `<option value='${card.generateId()}'>${card.describe()}</option>`).join('')}
+      </select>
+      <input type="submit" id="submit"></input>
+    </form>    
+  `
+
+  return markup
   }
 
   onSubmit(event) {

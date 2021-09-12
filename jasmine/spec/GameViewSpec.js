@@ -15,6 +15,44 @@ describe('GameView', () => {
   afterEach(() => {
     container.remove()
   })
+
+  describe('game over screen', () => {
+    let game
+
+    beforeEach(() => {
+      container.remove()
+      document.getElementById('main').innerHTML = ''
+      player_list = [new Player("John"), new Player("Bob")]
+      player_list[0]._score = 3
+      player_list[1]._score = 5
+      game = new Game(player_list)
+      container = document.createElement('div')
+    })
+
+    it('appears when the game is over', () => {
+      player_list.forEach(player => player.setHand([]))
+      game.deck()._cards = []
+      view = new GameView(game)
+      view.draw(container)
+      expect(container.innerHTML).toContain("Game Over")
+    })
+
+    it('displays the score of each player', () => {
+      player_list.forEach(player => player.setHand([]))
+      game.deck()._cards = []
+      view = new GameView(game)
+      view.draw(container)
+      expect(container.innerHTML).toContain("John- 3 book(s)")
+      expect(container.innerHTML).toContain("Bob- 5 book(s)")
+    })
+
+    it('does not appear when the game is not over', () => {
+      player_list.forEach(player => player.setHand([new Card('7', 'S')]))
+      view = new GameView(game)
+      view.draw(container)
+      expect(container.innerHTML).not.toContain("Game Over")
+    })
+  })
   
   describe('displaying players in a game', () => {
     it('lists the names of players in the game', () => {
@@ -81,6 +119,6 @@ describe('GameView', () => {
       container.remove()
     })
 
-    
+
   })
 })
