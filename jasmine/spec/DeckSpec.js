@@ -6,6 +6,15 @@ describe('Deck', () => {
     })
   })
 
+  describe('#cards', () => {
+    it('returns an array with the cards in the deck', () => {
+      const deck = new Deck()
+      const cardList = [new Card('8', 'D'), new Card('9', 'D')]
+      deck.setCards(cardList)
+      expect(deck.cards()).toEqual(cardList)
+    })
+  })
+
   describe('#cardsLeft', () => {
     it('returns the number of cards in the deck', () => {
       deck = new Deck()

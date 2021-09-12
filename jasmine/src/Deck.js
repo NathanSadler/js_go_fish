@@ -5,6 +5,10 @@ class Deck {
     this._cards = card_list
   }
 
+  cards() {
+    return this._cards
+  }
+
   // TODO: rename this to cardsLeft
   cardsLeft() {
     return this._cards.length
