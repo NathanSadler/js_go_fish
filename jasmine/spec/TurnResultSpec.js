@@ -77,6 +77,13 @@ describe('TurnResult', () => {
       testTurnResult._receivedCards = []
       expect(testTurnResult.gotRequestedRank()).toBeFalse()
     })
+
+    it('is false when the player did not ask for any rank', () => {
+      testTurnResult._requestedRank = null
+      testTurnResult._receivedCards = [new Card('8', 'D')]
+      testTurnResult._cardSource = 'the deck'
+      expect(testTurnResult.gotRequestedRank()).toBeFalse()
+    })
   })
 
   describe('#message', () => {
