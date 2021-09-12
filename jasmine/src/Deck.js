@@ -14,6 +14,10 @@ class Deck {
     return this._cards.shift()
   }
 
+  setCards(new_cards) {
+    this._cards = new_cards
+  }
+
   // shoutouts to https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
   shuffle() {
     const indexes = [...Array(this.cardsLeft() - 1)].map((_, index) => index + 1)

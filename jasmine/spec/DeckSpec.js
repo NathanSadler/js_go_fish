@@ -27,6 +27,15 @@ describe('Deck', () => {
     })
   })
 
+  describe('#setCards', () => {
+    it('sets the cards in the deck', () => {
+      const deck = new Deck()
+      const cardList = [new Card('8', 'D'), new Card('9', 'D')]
+      deck.setCards(cardList)
+      expect(deck._cards).toEqual(cardList)
+    })
+  })
+
   // TODO: Write own random method
   describe('#shuffle', () => {
     it('shuffles the deck', () => {
