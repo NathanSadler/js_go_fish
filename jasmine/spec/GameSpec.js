@@ -95,6 +95,15 @@ describe('Game', () => {
     })
   })
 
+  describe('#lastTurnResult', () => {
+    it('returns the most recent turn result of the game', () => {
+      const sampleResult = new TurnResult(game, 1, 0, '6', [new Card('Q', 'H')], 'the deck')
+      game._turnResults.push(new TurnResult(game, 0, 1, '8', [new Card('8', 'H')], 'the deck'))
+      game._turnResults.push(sampleResult)
+      expect(game.lastTurnResult()).toEqual(sampleResult)
+    })
+  })
+
   describe('#minimum_player_count', () => {
     it("returns the game's minimum number of players", () => {
       const game = new Game([new Player('Hello World')], 3)
@@ -135,13 +144,42 @@ describe('Game', () => {
       })
     })
 
-    describe('the current turn player not having any cards while there are still cards in the deck', () => {
+    describe('the upcoming turn player not having any cards while there are still cards in the deck', () => {
       let player3
+
       beforeEach(() => {
         player3 = new BotPlayer('Player 3')
-        game.addPlayer(player3)
         player3.setHand([])
-        
+        game.addPlayer(player3)
+        game._turnPlayerIndex = 1
+        game.deck().setCards([new Card('A', 'H')])
+        game._turnResults.push(new TurnResult(game, 1, 2, '3', [new Card('K', 'S')], 'the deck'))
+      })
+
+      it('draws a card from the deck and gives it to the new turn player', () => {
+        game.nextPlay()
+        expect(player3.cards()).toEqual([new Card('A', 'H')])
+      })
+
+      it('moves on to the next valid player', () => {
+        game.nextPlay()
+        expect(game.turnPlayerIndex()).toEqual(0)
+      })
+
+      it('will draw a card and move on to the next player for multiple players in a row', () => {
+        const player4 = new BotPlayer('Player4')
+        game.deck()._cards.push(new Card('A', 'D'))
+        game.addPlayer(player4)
+        game.nextPlay()
+        expect(game.turnPlayerIndex()).toEqual(0)
+        expect(player3.cards()).toEqual([new Card('A', 'H')])
+        expect(player4.cards()).toEqual([new Card('A', 'D')])
+      })
+
+      it('saves the appropriate turn result', () => {
+        game.nextPlay()
+        const sampleResult = new TurnResult(game, 2, -1, null, [new Card('A', 'H')], 'the deck')
+        expect(game.lastTurnResult()).toEqual(sampleResult)
       })
     })
 
@@ -155,15 +193,14 @@ describe('Game', () => {
         game._turnResults.push(new TurnResult(game, 1, 2, '3', [new Card('4', 'S')], 'the deck'))
         game.deck()._cards = [new Card('Q', 'C')]
         game._turnPlayerIndex = 1
+        game.nextPlay()
       })
 
       it('makes a bot player take their turn', () => {
-        game.nextPlay()
         expect(botPlayer.cards()).toEqual([new Card('7', 'H'), new Card('7', 'D'), new Card('Q', 'C')])
       })
 
       it('properly sets the turn player index when a bot is finished with their turn', () => {
-        game.nextPlay()
         expect(game.turnPlayerIndex()).toEqual(0)
       })
     })
@@ -260,6 +297,21 @@ describe('Game', () => {
       it("increments the turn player index if the asking player doesn't get a card of the rank they asked for from the deck", () => {
         game.playTurn(0, 1, '7')
         expect(game.turnPlayerIndex()).toEqual(1)
+      })
+    })
+
+    describe('what happens when a player loses all of their cards because they won a book', () => {
+      beforeEach(() => {
+        player1.setHand([new Card('4', 'D')])
+        game.playTurn(0, 1, '4')
+      })
+
+      it('moves the game on to the next player', () => {
+        expect(game.turnPlayerIndex()).toEqual(1)
+      })
+
+      it('draws a card for the player that won the book', () => {
+        expect(player1.cards()).toEqual([new Card('8', 'S')])
       })
     })
   })

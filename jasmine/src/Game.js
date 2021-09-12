@@ -56,6 +56,10 @@ class Game {
     return (allPlayersHaveNoCards && this.deck().cardsLeft() == 0)
   }
 
+  lastTurnResult() {
+    return this.turnResults()[this.turnResults().length - 1]
+  }
+
   minimum_player_count() {
     return this._minimum_player_count
   }
@@ -65,18 +69,32 @@ class Game {
     if(this.isOver()) {return}
 
     // increment the turn player index if the player didn't get the rank of card they asked for
-    if(!this.turnResults()[this.turnResults().length - 1].gotRequestedRank()) {
+    if(!this.lastTurnResult().gotRequestedRank()) {
       this.incrementTurnPlayerIndex()
     }
 
-    if(this.turnPlayer() instanceof BotPlayer) {
+    // let botPlayed = false
+
+    if((this.turnPlayer() instanceof BotPlayer) && this.turnPlayer().cardCount() > 0) {
       let bot = this.turnPlayer()
       this.playTurn(this.turnPlayerIndex(), bot.selectPlayerToAskIndex(this), bot.selectRankToAskFor(this))
+      // botPlayed = true
+    }
+
+    // if the new turn player doesn't have a card and there are cards in the deck, give a card from the deck to the turn player and
+    // move on to the next player.
+    if(this.turnPlayer().cardCount() == 0 && this.deck().cardsLeft() > 0) {
+      const takenCard = this.deck().removeCard()
+      this.turnPlayer().takeCard(takenCard)
+      this._turnResults.push(new TurnResult(this, this.turnPlayerIndex(), -1, null, [takenCard], 'the deck'))
+
+      // go to the next valid player unless taking that last card from the deck ended the game
+      if(!this.isOver()) {this.setTurnPlayerIndexToNextValidPlayer()}
     }
   }
 
   setTurnPlayerIndexToNextValidPlayer() {
-    if(!this.deck().cardsLeft() == 0) {
+    if(this.deck().cardsLeft() > 0) {
       this.incrementTurnPlayerIndex()
     }
     // If there are no more cards in the deck, increment the turn player index until reaching a player that still has cards
