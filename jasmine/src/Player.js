@@ -9,6 +9,10 @@ class Player {
     return this._cards
   }
 
+  cardCount() {
+    return this.cards().length
+  }
+
   countCardsWithRank(rank) {
     return this.getCardsWithRank(rank).length
   }

@@ -11,6 +11,14 @@ describe('Player', () => {
     })
   })
 
+  describe('#cardCount', () => {
+    it('returns the number of cards the player has', () => {
+      card_list = [new Card("4", "D"), new Card("5", "D"), new Card("6", "D")]
+      player.setHand(card_list)
+      expect(player.cardCount()).toEqual(3)
+    })
+  })
+
   describe('#cards', () => {
     it('returns a list of the cards the player has', () => {
       card_list = [new Card("4", "D"), new Card("5", "D"), new Card("6", "D")]
