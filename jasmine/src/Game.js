@@ -70,7 +70,7 @@ class Game {
 
     // increment the turn player index if the player didn't get the rank of card they asked for
     if(!this.lastTurnResult().gotRequestedRank()) {
-      this.incrementTurnPlayerIndex()
+      this.setTurnPlayerIndexToNextValidPlayer()
     }
 
     // let botPlayed = false
@@ -89,7 +89,7 @@ class Game {
       this._turnResults.push(new TurnResult(this, this.turnPlayerIndex(), -1, null, [takenCard], 'the deck'))
 
       // go to the next valid player unless taking that last card from the deck ended the game
-      if(!this.isOver()) {this.setTurnPlayerIndexToNextValidPlayer()}
+      if(!this.isOver()) {this.nextPlay()}
     }
   }
 
