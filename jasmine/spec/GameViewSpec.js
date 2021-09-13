@@ -4,7 +4,7 @@ describe('GameView', () => {
   beforeEach(() => {
     document.getElementById('main').innerHTML = ''
     player_list = [new Player("John"), new Player("Bob")]
-    player_list[0]._cards = [new Card("7", "D"), new Card("8", "H")]
+    player_list[0]._cards = [new Card("7", "D"), new Card("9", "H")]
     player_list[1]._cards = [new Card("9", "D"), new Card("10", "H"), new Card("J", "H")]
     
     view = new GameView(new Game(player_list))
@@ -56,14 +56,14 @@ describe('GameView', () => {
   
   describe('displaying players in a game', () => {
     it('lists the names of players in the game', () => {
-      document.getElementById('main').innerHTML = ''
+      // document.getElementById('main').innerHTML = ''
       expect(container.innerHTML).toContain("John")
       expect(container.innerHTML).toContain("Bob")
     })
 
     it('displays the cards in the hand of the first player', () => {
       expect(container.innerHTML).toContain("7 of Diamonds")
-      expect(container.innerHTML).toContain("8 of Hearts")
+      expect(container.innerHTML).toContain("9 of Hearts")
     })
 
     it("doesn't display the cards of the players who are not the first", () => {
@@ -77,7 +77,7 @@ describe('GameView', () => {
     })
   })
 
-  xdescribe('displaying turn results', () => {
+  describe('displaying turn results', () => {
     it('displays turn results', () => {
       document.getElementById('main').innerHTML = ''
       game = new Game(player_list)
@@ -86,13 +86,13 @@ describe('GameView', () => {
       game.deck()._cards = [new Card('A', 'S')]
       const view = new GameView(game)
       container = document.createElement('div')
-      document.body.appendChild(container)
+      document.getElementById('main').appendChild(container)
       view.draw(container)
       view.playerSelectionBox().selectedIndex = 1
       view.cardSelectionBox().selectedIndex = 0
       view.submitButton().click()
       const message = 'John asked Bob for Qs and drew a card from the deck.'
-      expect(container.innerHTML).toContain(message)
+      expect(document.body.innerHTML).toContain(message)
     })
   })
   

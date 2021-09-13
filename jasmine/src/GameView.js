@@ -85,10 +85,10 @@ class GameView {
    this._game.playTurn(this._game.turnPlayerIndex(), requested_player_index, requested_rank)
    
    // make new view with updated game
-   const view = new GameView(this._game)
+  //  const view = new GameView(this._game)
 
    // display new updated view
-   view.draw(document.getElementById('main'))
+   this.draw(document.getElementById('main'))
   }
 
   playerSelectionBox() {
