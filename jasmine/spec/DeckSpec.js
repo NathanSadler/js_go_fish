@@ -41,7 +41,7 @@ describe('Deck', () => {
 
     xit('returns an empty array when there are no cards in the deck', () => {
       deck.setCards([])
-      expect(deck.removeCard()).toEqual([])
+      expect(deck.removeCard()).toEqual(null)
     })
   })
 
