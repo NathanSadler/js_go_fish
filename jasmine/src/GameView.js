@@ -40,6 +40,7 @@ class GameView {
   mainScreenMarkup() {
     const markup = `
     <h1>Game</h1>
+    <p>You are ${this.game().players()[0]}</p>
     <p>It is ${this.game().turnPlayer().name()}'s turn</p>
     <p>The deck has ${this.game().deck().cardsLeft()} card(s).</p>
     <div style='display:flex; flex-direction:row'>
@@ -61,7 +62,7 @@ class GameView {
     
     <form class='turn-form'>
       <select name="player_name" id="player_name">
-        ${this.game().players().map((player, index) => `<option value="${index}">${player.name()}</option>`).join('')}
+        ${this.game().players().slice(1).map((player) => `<option value="${this.game().getIndexOfPlayer(player)}">${player.name()}</option>`).join('')}
       </select>
 
       <select name='card' id='card'>

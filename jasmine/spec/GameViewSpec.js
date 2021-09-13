@@ -93,7 +93,7 @@ describe('GameView', () => {
       container = document.createElement('div')
       document.getElementById('main').appendChild(container)
       view.draw(container)
-      view.playerSelectionBox().selectedIndex = 1
+      view.playerSelectionBox().selectedIndex = 0
       view.cardSelectionBox().selectedIndex = 0
       view.submitButton().click()
       const message = 'John asked Bob for Qs and drew a card from the deck.'
@@ -113,9 +113,13 @@ describe('GameView', () => {
       container = document.createElement('div')
       document.body.appendChild(container)
       view.draw(container)
-      view.playerSelectionBox().selectedIndex = 1
+      view.playerSelectionBox().selectedIndex = 0
       view.cardSelectionBox().selectedIndex = 1
       view.submitButton().click()
+    })
+
+    afterEach(() => {
+      container.remove()
     })
 
     it('lets users take a turn', () => {
@@ -123,6 +127,10 @@ describe('GameView', () => {
       container.remove()
     })
 
+    it('does not give players the option to ask themselves for a card', () => {
+      const playerNames = Array.from(view.playerSelectionBox().children).map(playerOption => playerOption.innerText)
+      expect(playerNames).not.toContain(game.players()[0].name())
+    })
 
   })
 })
