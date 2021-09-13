@@ -24,15 +24,24 @@ describe('Deck', () => {
   })
 
   describe('#removeCard', () => {
-    it('removes the top card from the deck', () => {
+    let deck
+    
+    beforeEach(() => {
       deck = new Deck([new Card("4", "D"), new Card("7", "S"), new Card("9", "D")])
+    })
+
+    it('removes the top card from the deck', () => {
       deck.removeCard()
       expect(deck._cards.length).toBe(2)
     })
 
     it('returns the card that was removed', () => {
-      deck = new Deck([new Card("4", "D"), new Card("7", "S"), new Card("9", "D")])
       expect(deck.removeCard()).toEqual(new Card("4", "D"))
+    })
+
+    xit('returns an empty array when there are no cards in the deck', () => {
+      deck.setCards([])
+      expect(deck.removeCard()).toEqual([])
     })
   })
 

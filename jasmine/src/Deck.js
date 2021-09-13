@@ -15,7 +15,10 @@ class Deck {
   }
 
   removeCard() {
-    return this._cards.shift()
+    if(this.cardsLeft() > 0) {
+      return this._cards.shift()
+    }
+    return []
   }
 
   setCards(new_cards) {
