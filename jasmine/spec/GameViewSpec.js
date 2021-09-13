@@ -8,6 +8,7 @@ describe('GameView', () => {
     player_list[1]._cards = [new Card("9", "D"), new Card("10", "H"), new Card("J", "H")]
     
     view = new GameView(new Game(player_list))
+    view._game.deck().setCards([new Card('8', 'H')])
     container = document.createElement('div')
     view.draw(container)
   })
@@ -53,6 +54,10 @@ describe('GameView', () => {
       expect(container.innerHTML).not.toContain("Game Over")
     })
   })
+
+  it('displays the number of cards in the deck', () => {
+    expect(container.innerHTML).toContain('The deck has 1 card(s).')
+  })
   
   describe('displaying players in a game', () => {
     it('lists the names of players in the game', () => {
@@ -96,7 +101,6 @@ describe('GameView', () => {
     })
   })
   
-
   describe('taking a turn', () => {
     let game, view, container
 

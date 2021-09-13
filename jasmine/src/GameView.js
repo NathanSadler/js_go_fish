@@ -41,6 +41,7 @@ class GameView {
     const markup = `
     <h1>Game</h1>
     <p>It is ${this.game().turnPlayer().name()}'s turn</p>
+    <p>The deck has ${this.game().deck().cardsLeft()} card(s).</p>
     <div style='display:flex; flex-direction:row'>
       <div>
         <h2>Players</h2>
