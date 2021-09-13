@@ -54,15 +54,20 @@ class Player {
   }
 
   takeCard(taken_card) {
-    this._cards.push(taken_card)
+    if(taken_card !== null) {
+      this._cards.push(taken_card)
 
-    const taken_card_rank = taken_card.rank()
-
-    if(this.countCardsWithRank(taken_card_rank) == 4) {
-      this._score += 1
-      this.removeCardsWithRank(taken_card_rank)
+      const taken_card_rank = taken_card.rank()
+  
+      if(this.countCardsWithRank(taken_card_rank) == 4) {
+        this._score += 1
+        this.removeCardsWithRank(taken_card_rank)
+      }
+      
+      return taken_card
     }
-    
-    return taken_card
+
+    return []
+
   }
 }

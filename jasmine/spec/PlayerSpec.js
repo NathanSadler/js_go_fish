@@ -114,6 +114,17 @@ describe('Player', () => {
       test_card = new Card('7', 'D')
     })
 
+    describe('the player taking null', () => {
+      it("doesn't add anything to the player's hand", () => {
+        player.takeCard(null)
+        expect(player.cardCount()).toEqual(0)
+      })
+
+      it("returns an empty array", () => {
+        expect(player.takeCard(null)).toEqual([])
+      })
+    })
+
     it('gives a card to the player', () => {
       player.takeCard(test_card)
       expect(player.cards()).toEqual([test_card])
